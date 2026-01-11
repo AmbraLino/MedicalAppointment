@@ -1,0 +1,75 @@
+.create-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #dda15e 0%, #fefae0 100%);
+  padding: 40px 15px;
+}
+
+.create-card {
+  background-color: #fefae0;
+  border-radius: 15px;
+  padding: 25px;
+}
+
+.create-title {
+  font-family: 'Poppins', 'Segoe UI', sans-serif;
+  font-size: 2rem;
+  color: #bc6c25;
+  font-weight: 600;
+}
+
+.create-form .form-control {
+  border-radius: 10px;
+  border: 1px solid #fefae0;
+  box-shadow: none;
+  transition: all 0.3s ease;
+}
+
+.create-form .form-control:focus {
+  border-color: #dda15e;
+  box-shadow: 0 0 0 0.15rem rgba(164, 92, 93, 0.25);
+}
+
+.create-btn {
+  background-color: #bc6c25;
+  border: none;
+  border-radius: 30px;
+  padding: 12px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  color: #fff;
+}
+
+.create-btn:hover {
+  background-color: #ffe15d;
+  transform: translateY(-2px);
+}
+
+.preview-container {
+  background-color: #fefae0;
+  border: 1px dashed #dda15e;
+  border-radius: 12px;
+  padding: 10px;
+  display: inline-block;
+  transition: all 0.3s ease;
+}
+
+.preview-container:hover {
+  background-color: #f6e2e2;
+}
+
+.preview-image {
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(90, 26, 26, 0.2);
+}
+
+@media (max-width: 576px) {
+  .create-title {
+    font-size: 1.6rem;
+  }
+
+  .create-card {
+    padding: 15px 20px;
+  }
+}

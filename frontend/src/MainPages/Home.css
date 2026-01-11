@@ -1,0 +1,323 @@
+/* @import url("https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&family=Roboto:wght@300;400;500&display=swap"); */
+
+.home-container {
+  /* background-color: #606c38; */
+  color: #fefae0;
+  font-family: "Roboto", sans-serif;
+  overflow-x: hidden;
+}
+.home-h {
+  color: #fefae0;
+  font-family: "Outfit", sans-serif;
+}
+.home-p {
+  color: #fefae0;
+  font-family: "Roboto", sans-serif;
+  line-height: 1.7;
+}
+.home-top {
+  /* background: linear-gradient(rgba(40, 54, 24, 0.6), rgba(40, 54, 24, 0.6)),
+    url("../Images/home3.jpg") center/cover no-repeat; */
+  color: #fefae0;
+  height: 60vh;
+}
+.home-top-text {
+  font-family: "Outfit", sans-serif;
+  text-shadow: 2px 2px 6px rgba(10, 21, 115, 0.8);
+  color:rgb(255, 255, 255);
+  font-size: 40px;
+  text-align: left;
+  padding-right: 65%;
+  font-weight: bolder;
+  padding-bottom: 1%;
+}
+.home-text{
+  font-family: "Outfit", sans-serif;
+  text-shadow: 2px 2px 6px rgba(10, 21, 115, 0.8);
+  text-align: left;
+  font-size: 12px;
+  padding-right: 67%;
+  padding-bottom: 10%;
+}
+.home-top-filter {
+  background-color: #fefae0;
+  color: #283618;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+.home-top-filter:hover {
+  background-color: #dda15e;
+  color: #fefae0;
+  transform: scale(1.05);
+}
+
+.stats-overlay {
+    position: absolute;
+    bottom: 69px;
+    left: 70%;
+    transform: translateX(-50%);
+    width: 60%; 
+    background: rgba(255, 255, 255, 0.15); 
+    backdrop-filter: blur(10px); 
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 20px 20px 0 0 ; 
+    padding: 30px 20px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.stat-item {
+    flex: 1;
+}
+
+.stat-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+.stat-desc {
+    font-size: 0.9rem;
+    text-transform: capitalize;
+    opacity: 0.9;
+    margin: 0;
+}
+
+
+.about-wrapper {
+  display: flex;             
+  align-items: center;       
+  justify-content: space-between; 
+  padding: 50px 15%;         
+  background-color: #f9fbf9; 
+}
+.about-content {
+  flex: 1;                   
+  padding-right: 50px;      
+}
+
+.home-about-title {
+  color: #008Ecc;           
+  font-weight: bold;
+  letter-spacing: 2px;
+  margin-bottom: 15px;
+  font-size: 15px;
+}
+.home-about{
+  color:#144a6c;
+  font-weight: bolder;
+  font-size: 30px;
+}
+.home-about-desc {
+  font-size: 12px;
+  font-weight: 400;
+  /* color: #C0C3B9; */
+  color:#769382;
+  
+}
+
+.about-image {
+  flex: 1;                   
+  display: flex;
+  justify-content: center;
+}
+
+.about-image img {
+  width: 100%;               
+  max-width: 500px;          
+  height: auto;              
+  border-radius: 20px;       
+  shadow: 0 10px 30px rgba(0,0,0,0.1); 
+}
+
+.dept-subtitle {
+  color: #3a86ff;
+  font-weight: bold;
+  letter-spacing: 1px;
+  font-size: 0.9rem;
+  margin-bottom: 5px;
+}
+
+.dept-main-title {
+  color: #1a2c5b;
+  font-weight: 800;
+  font-size: 2.5rem;
+}
+
+.department-wrapper {
+  /* display: grid; */
+  /* repeat(3, 1fr) do të thotë 3 kolona të barabarta */
+  /* grid-template-columns: repeat(3, 100px);  */
+  gap: 12px; 
+  display: flex;
+  flex-wrap: wrap;
+  /* padding: 10px 0; */
+  /* max-width: 700px;  */
+  /* margin: 0 auto; */
+  justify-content: center; 
+}
+
+.dept-item {
+  background: white;
+  border: 1px solid #e8effe; 
+  border-radius: 10px;
+  /* padding: 10px 5px;  */
+  display: flex;
+  flex-direction: column;
+  align-items: center; 
+  justify-content: center;
+  /* transition: all 0.3s ease; */
+  cursor: pointer;
+  text-align: center; 
+  /* min-height: auto;  */
+  width: 80%;           
+  height: 2%;
+}
+
+.dept-icon-box {
+  font-size: 1.5rem; 
+  color: #6b9ff3;
+  /* margin-right: 0;  */
+  margin-bottom: 5px; 
+  display: flex;
+  align-items: center;
+  /* transition: 0.3s; */
+}
+
+.dept-title {
+  font-size: 0.r8em; /* Ule madhësinë e fontit të titullit */
+  font-weight: 600;
+  color: #1a2c5b;
+  margin: 0;
+  line-height: 1.1;
+  padding: 0 5px;
+}
+
+.dept-item:hover {
+  background-color: #84c9a3; 
+  border-color: #3a86ff;
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(0,0,0, 0.1);
+}
+
+
+
+.dept-item:hover .dept-icon-box,
+.dept-item:hover .dept-title {
+  color: white;
+}
+
+.our-values {
+    padding: 60px 20px;
+    text-align: center;
+    background-color: #f4f7fa;
+    font-family: 'Arial', sans-serif;
+}
+
+.values-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 25px;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.value-card {
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 40px 30px;
+    width: 300px;
+    position: relative; /* Nevojitet për vijën sipër */
+    overflow: hidden;   /* Që vija të mos dalë jashtë rrethimit */
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border-top: 5px solid transparent; /* Vija e padukshme në fillim */
+}
+
+/* --- EFEKTI HOVER --- */
+
+.value-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.1);
+    border-top: 5px solid #4a90e2; /* Vija bëhet blu këtu */
+}
+
+.value-card:hover h3 {
+    color: #4a90e2; /* Titulli bëhet blu këtu */
+}
+
+/* -------------------- */
+
+.value-card .icon {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #4a90e2;
+}
+
+.value-card h3 {
+    color: #333;
+    margin-bottom: 15px;
+    font-size: 1.4rem;
+    transition: color 0.3s ease;
+}
+
+.value-card p {
+    color: #666;
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+/* Për celular */
+@media (max-width: 768px) {
+    .value-card { width: 100%; }
+}
+/* Përshtatja për celular */
+@media (max-width: 768px) {
+    .value-card {
+        width: 100%;
+    }
+}
+
+/* Përshtatja për celular */
+@media (max-width: 992px) {
+  .department-wrapper {
+    grid-template-columns: repeat(2, 1fr); /* 2 kolona për tablet */
+  }
+}
+
+@media (max-width: 600px) {
+  .department-wrapper {
+    grid-template-columns: 1fr; /* 1 kolonë për celular */
+  }
+}
+
+/* RESPONSIVE: Ne celular, vendosi njera nen tjetren */
+@media (max-width: 768px) {
+  .about-wrapper {
+    flex-direction: column;  /* Teksti lart, fotoja poshte */
+    text-align: center;
+    padding: 40px 5%;
+  }
+  
+  .about-content {
+    padding-right: 0;
+    margin-bottom: 30px;
+  }
+  
+  .home-about-desc {
+    font-size: 1.4rem;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+

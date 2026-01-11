@@ -1,0 +1,73 @@
+/* Update.css */
+
+.update-container {
+  background: linear-gradient(135deg, #FEFAE0, #DDA15E, #BC6C25, #606C38, #283618);
+  min-height: 100vh;
+  padding: 50px 20px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.update-form {
+  background-color: rgba(255, 255, 255, 0.95);
+  padding: 30px;
+  border-radius: 15px;
+  max-width: 900px; /* më i gjerë */
+  width: 100%;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-direction: row;
+  gap: 30px;
+}
+
+.form-left {
+  flex: 2; /* të dhënat marrin 2/3 e hapësirës */
+}
+
+.form-right {
+  flex: 1; /* fotoja merr 1/3 e hapësirës */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.update-form h1 {
+  text-align: center;
+  margin-bottom: 25px;
+  color: #283618;
+  font-weight: bold;
+}
+
+.update-form .form-label {
+  font-weight: 600;
+  color: #606C38;
+}
+
+.update-form .form-control {
+  border-radius: 8px;
+  border: 1px solid #DDA15E;
+  padding: 10px;
+  margin-bottom: 15px;
+}
+
+.update-form button {
+  background-color: #283618;
+  color: #FEFAE0;
+  font-weight: 600;
+  width: 100%;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.update-form button:hover {
+  background-color: #606C38;
+  color: #FEFAE0;
+}
+
+.update-form img {
+  max-width: 100%;
+  border-radius: 15px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}

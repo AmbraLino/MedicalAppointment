@@ -1,0 +1,247 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Outfit:wght@500&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
+.footer-info {
+    font-family: "Roboto";
+    margin-top: 20px;
+}
+
+.footer {
+    width: 99vw;
+    margin: 0;
+   position: relative;
+   left: 0;
+   background-color: #769382;
+    color: #FEFAE0;
+    padding:10px 8%;
+    margin: 4px 0 0 0; 
+}
+
+.footer-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 30px;
+    margin: 1%;
+}
+
+.footer-left {
+    max-width: 20%;
+    min-width: 200px;
+    position: relative;
+    padding-bottom: 70px;
+}
+
+.footer-left p {
+    font-size: 12px;
+    line-height: 1.5;
+    margin-bottom: 20%;
+}
+
+.footer-logo {
+    /* margin-top: 120px;*/
+    position: absolute;
+    bottom: 0px;
+    left: 0;
+    display: flex;
+    gap: 10px;
+    margin-bottom: -20%;
+}
+
+.fb,
+.ig,
+.wp,
+.tt {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1px solid white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    padding: 5%;
+    /* margin-bottom: 3%; */
+    transition: 0.3s;
+}
+
+.fb:hover,
+.ig:hover,
+.tt:hover {
+    color: #283618;
+    background-color: #FEFAE0;
+}
+
+.footer-right {
+    display: flex;
+    gap: 50px;
+    flex-wrap: wrap;
+}
+
+.footer-title {
+    font-size: 18px;
+    font-family: "Outfit";
+
+}
+
+.footer-right p {
+    font-size: 15px;
+    margin: 5px 0px;
+}
+
+.footer-terms {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 13px;
+}
+
+.footer-line {
+    height: 1.5px;
+    background-color: #FEFAE0;
+    width: 100%;
+    margin: 90px auto 10px;
+    opacity: 0.3;
+}
+
+@media (max-width: 992px) {
+    .footer-top {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .footer-left {
+        max-width: 100%;
+        margin-bottom: 30px;
+    }
+
+    .footer-right {
+        justify-content: center;
+        text-align: center;
+    }
+
+    .footer-right .title {
+        font-size: 16px;
+    }
+    
+}
+
+@media (max-width: 576px) {
+    .footer {
+        padding: 8% 5%;
+    }
+
+    .footer-top {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 25px;
+    }
+
+    .footer-left {
+        max-width: 100%;
+        margin-bottom: 20px;
+    }
+
+    .footer-left h1 {
+        font-size: 20px;
+    }
+
+    .footer-left p {
+        font-size: 11px;
+        margin-bottom: 15px;
+    }
+
+    .footer-logo {
+        position: static;       
+        justify-content: center; 
+        display: flex;          
+        gap: 10px;              
+        margin-top: 20px;
+    }
+
+    .fb,
+    .ig,
+    .tt {
+        width: 35px;
+        height: 35px;
+        font-size: 15px;
+    }
+
+    .footer-right {
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+    }
+
+    .footer-right .footer-title {
+        font-size: 15px;
+    }
+
+    .footer-right p {
+        font-size: 12px;
+    }
+
+    .footer-terms {
+        font-size: 12px;
+    }
+  
+}
+
+
+@media (max-width: 320px) {
+
+    html,
+    body {
+        margin: 0;
+        padding: 0;
+        overflow-x: hidden;
+    }
+
+    .footer {
+        width: 100vw;
+        max-width: 100%;
+        margin: 0;
+        padding: 8% 4%;
+        position: relative;
+        left: 50%;
+        right: 50%;
+        margin-left: -50vw;
+        margin-right: -50vw;
+        box-sizing: border-box;
+    }
+
+    .footer-left h1 {
+        font-size: 18px;
+    }
+
+    .footer-left p {
+        font-size: 10px;
+        margin-bottom: 10px;
+    }
+
+    .fb,
+    .ig,
+    .tt {
+        width: 30px;
+        height: 30px;
+        font-size: 13px;
+    }
+ 
+    .footer-right {
+        gap: 10px;
+    }
+
+    .footer-right .footer-title {
+        font-size: 14px;
+    }
+
+    .footer-right p {
+        font-size: 11px;
+    }
+
+    .footer-terms {
+        font-size: 10px;
+        margin-top: 10px;
+    }
+}

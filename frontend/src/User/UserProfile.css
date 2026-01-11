@@ -1,0 +1,110 @@
+.user-profile-wrapper {
+  display: flex;
+  max-width:100%;
+  height: auto;
+  margin: 50px auto;
+  background-color: #606C38; 
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.25);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #283618;
+}
+
+
+.profile-column {
+  flex: 1;
+  padding: 40px 30px;
+  background-color: #283618; 
+}
+
+.profile-column h2 {
+  text-align: center;
+  color: #BC6C25; 
+  margin-bottom: 30px;
+  font-size: 28px;
+}
+
+.profile-picture-wrapper {
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.profile-picture-wrapper img {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 3px solid #FEFAE0;
+  margin-bottom: 15px;
+  transition: transform 0.3s;
+}
+
+.profile-picture-wrapper img:hover {
+  transform: scale(1.1);
+}
+
+.user-profile-form label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 5px;
+  color: #FEFAE0;
+}
+
+.user-profile-form input {
+  width: 100%;
+  padding: 10px 12px;
+  margin-bottom: 20px;
+  border: 1px solid #FEFAE0;
+  border-radius: 8px;
+  background-color: #fefae0;
+  font-size: 14px;
+  transition: border 0.3s;
+}
+
+.user-profile-form input:focus {
+  outline: none;
+  border-color: #FEFA05; 
+}
+
+.user-profile-form button {
+  width: 100%;
+  padding: 12px;
+  background-color: #DDA15E;
+  color: #283618;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background 0.3s, transform 0.2s;
+}
+
+.user-profile-form button:hover {
+  background-color: #BC6C25; 
+  transform: scale(1.05);
+}
+
+.reservations-column {
+  flex: 1;
+  padding: 40px 30px;
+  background-color: #606C38;
+  border-left: 2px solid #FEFA05; 
+}
+
+.reservations-column h2 {
+  color: #DDA15E; 
+  text-align: center;
+  font-size: 26px;
+  margin-bottom: 20px;
+}
+
+.reservations-placeholder {
+  height: 500px;
+  border: 2px dashed #DDA15E; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #DDA15E; 
+ font-size: 16px;
+}
