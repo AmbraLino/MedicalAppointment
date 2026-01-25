@@ -1,0 +1,108 @@
+/* Konteksti kryesor i faqes */
+.confirm-booking-page {
+    background-color: #f0f4f8; /* Ngjyrë e lehtë që nuk vret syrin */
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    font-family: 'Inter', sans-serif;
+}
+
+/* Karta e rezervimit */
+.booking-card {
+    background: #ffffff;
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+    max-width: 550px;
+    width: 100%;
+    padding: 40px !important;
+    border: 1px solid #e1e8ed;
+}
+
+/* Titulli */
+.booking-card h2 {
+    color: #1a3a8a;
+    font-weight: 800;
+    font-size: 1.8rem;
+    letter-spacing: -0.5px;
+}
+
+/* Kutia e përzgjedhjes së orarit (Info nga kalendari) */
+.selected-slot-info {
+    background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+    border: 1px solid #bfdbfe;
+    padding: 20px;
+    border-radius: 12px;
+}
+
+.selected-slot-info p {
+    font-size: 0.9rem;
+    color: #1e40af;
+    margin-bottom: 5px;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+.selected-slot-info h5 {
+    color: #1e3a8a;
+    margin: 0;
+    font-size: 1.25rem;
+}
+
+/* Inputet */
+.booking-card .form-label {
+    color: #475569;
+    margin-bottom: 8px;
+    font-size: 0.95rem;
+}
+
+.booking-card .form-control {
+    border: 2px solid #e2e8f0;
+    border-radius: 10px;
+    padding: 12px 15px;
+    font-size: 1rem;
+    transition: all 0.2s ease;
+}
+
+.booking-card .form-control:focus {
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
+    outline: none;
+}
+
+/* Butoni i Konfirmimit */
+.btn-primary {
+    background: #2563eb !important;
+    border: none !important;
+    border-radius: 10px !important;
+    font-weight: 700 !important;
+    font-size: 1rem !important;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease !important;
+    margin-top: 10px;
+}
+
+.btn-primary:hover {
+    background: #1d4ed8 !important;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 15px rgba(37, 99, 235, 0.2);
+}
+
+/* Teksti ndihmës poshtë */
+.booking-footer-note {
+    font-size: 0.85rem;
+    color: #94a3b8;
+    text-align: center;
+    margin-top: 20px;
+}
+
+/* Animacion i lehtë kur hapet faqja */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.booking-card {
+    animation: fadeIn 0.5s ease-out;
+}

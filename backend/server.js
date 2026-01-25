@@ -13,6 +13,7 @@ const agentApp = require("./Routes/agentRoute");
 const productApp = require("./Routes/productRoute");
 const orderApp = require("./Routes/orderRoute"); 
 const agentOrderRoute = require("./Routes/agentOrderRoute");
+const bookingRoute = require('./Routes/bookingRoute');
 const app = express();
 
 app.use(cors({
@@ -36,7 +37,7 @@ app.use("/admin", adminApp);
 app.use("/product", productApp);
 app.use("/order", orderApp);
 app.use("/agent", agentOrderRoute);
-
+app.use("/booking", bookingRoute);
 mongoose.connect(
   "mongodb+srv://MedicalSystem:2E8MxSqfXmAN2WNR@medicalcluster.hs25uwx.mongodb.net/?appName=MedicalCluster"
 )

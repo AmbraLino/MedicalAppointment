@@ -108,102 +108,102 @@
 
 
 
-import React, { useState } from 'react';
-import './Department.css';
+// import React, { useState } from 'react';
+// import './Department.css';
 
-const Department = () => {
-  // Te dhenat per reviews (mund t'i marresh nga API ne MERN)
-  const reviewsData = [
-    {
-      id: 1,
-      name: "PAULO HUBERT",
-      location: "New York, USA",
-      comment: "I recently had to bring my child to the hospital for a minor injury. The staff was very professional and quick.",
-      rating: 5
-    },
-    {
-      id: 2,
-      name: "LAURENCE VENDETTA",
-      location: "California, USA",
-      comment: "The care we received was exceptional. From the reception to the doctors, everyone made us feel at ease.",
-      rating: 4
-    },
-    {
-      id: 3,
-      name: "CASSANDRA RAUL",
-      location: "Rome",
-      comment: "Very clean facilities and very short waiting times. I highly recommend this hospital for any emergency.",
-      rating: 5
-    }
-  ];
+// const Department = () => {
+//   // Te dhenat per reviews (mund t'i marresh nga API ne MERN)
+//   const reviewsData = [
+//     {
+//       id: 1,
+//       name: "PAULO HUBERT",
+//       location: "New York, USA",
+//       comment: "I recently had to bring my child to the hospital for a minor injury. The staff was very professional and quick.",
+//       rating: 5
+//     },
+//     {
+//       id: 2,
+//       name: "LAURENCE VENDETTA",
+//       location: "California, USA",
+//       comment: "The care we received was exceptional. From the reception to the doctors, everyone made us feel at ease.",
+//       rating: 4
+//     },
+//     {
+//       id: 3,
+//       name: "CASSANDRA RAUL",
+//       location: "Rome",
+//       comment: "Very clean facilities and very short waiting times. I highly recommend this hospital for any emergency.",
+//       rating: 5
+//     }
+//   ];
 
-  const [activeReview, setActiveReview] = useState(reviewsData[0]);
+//   const [activeReview, setActiveReview] = useState(reviewsData[0]);
 
-  const departments = [
-    { name: "Emergency Department", icon: "🚨" },
-    { name: "Pediatric Department", icon: "👶" },
-    { name: "Obstetrics and Gynecology", icon: "🏥" },
-    { name: "Cardiology Department", icon: "🫀" },
-    { name: "Neurology Department", icon: "🧠" },
-    { name: "Psychiatry Department", icon: "🧬" },
-  ];
+//   const departments = [
+//     { name: "Emergency Department", icon: "🚨" },
+//     { name: "Pediatric Department", icon: "👶" },
+//     { name: "Obstetrics and Gynecology", icon: "🏥" },
+//     { name: "Cardiology Department", icon: "🫀" },
+//     { name: "Neurology Department", icon: "🧠" },
+//     { name: "Psychiatry Department", icon: "🧬" },
+//   ];
 
-  return (
-    <div className="hospital-container">
-      {/* DEPARTMENTS */}
-      <section className="departments-section">
-        <div className="blue-header-bg">
-          <h2>Departments</h2>
-        </div>
-        <div className="dept-grid">
-          {departments.map((dept, index) => (
-            <div key={index} className="dept-card">
-              <span className="dept-icon">{dept.icon}</span>
-              <p>{dept.name}</p>
-            </div>
-          ))}
-        </div>
-      </section>
+//   return (
+//     <div className="hospital-container">
+//       {/* DEPARTMENTS */}
+//       <section className="departments-section">
+//         <div className="blue-header-bg">
+//           <h2>Departments</h2>
+//         </div>
+//         <div className="dept-grid">
+//           {departments.map((dept, index) => (
+//             <div key={index} className="dept-card">
+//               <span className="dept-icon">{dept.icon}</span>
+//               <p>{dept.name}</p>
+//             </div>
+//           ))}
+//         </div>
+//       </section>
 
-      {/* REVIEWS */}
-      <section className="reviews-section">
-        <div className="reviews-header">
-          <h2>SOME REVIEWS</h2>
-          <p className="subtitle">OF OUR CLIENTS</p>
-        </div>
+//       {/* REVIEWS */}
+//       <section className="reviews-section">
+//         <div className="reviews-header">
+//           <h2>SOME REVIEWS</h2>
+//           <p className="subtitle">OF OUR CLIENTS</p>
+//         </div>
 
-        <div className="reviews-content">
-          {/* Lista e personave majtas */}
-          <div className="users-list">
-            {reviewsData.map((user) => (
-              <div 
-                key={user.id} 
-                className={`user-item ${activeReview.id === user.id ? 'active-user' : ''}`}
-                onClick={() => setActiveReview(user)}
-              >
-                <div className="user-info">
-                  <h4>{user.name}</h4>
-                  <small>{user.location}</small>
-                </div>
-              </div>
-            ))}
-          </div>
+//         <div className="reviews-content">
+//           {/* Lista e personave majtas */}
+//           <div className="users-list">
+//             {reviewsData.map((user) => (
+//               <div 
+//                 key={user.id} 
+//                 className={`user-item ${activeReview.id === user.id ? 'active-user' : ''}`}
+//                 onClick={() => setActiveReview(user)}
+//               >
+//                 <div className="user-info">
+//                   <h4>{user.name}</h4>
+//                   <small>{user.location}</small>
+//                 </div>
+//               </div>
+//             ))}
+//           </div>
 
-          {/* Paneli i komentit djathtas */}
-          <div className="testimonial-box">
-            <div className="rating-badge">Rating: {activeReview.rating}/5</div>
-            <span className="quote-mark">“</span>
-            <p className="fade-in" key={activeReview.id}>
-              {activeReview.comment}
-            </p>
-            <div className="stars">
-              {"★".repeat(activeReview.rating)}{"☆".repeat(5 - activeReview.rating)}
-            </div>
-          </div>
-        </div>
-      </section>
-    </div>
-  );
-};
+//           {/* Paneli i komentit djathtas */}
+//           <div className="testimonial-box">
+//             <div className="rating-badge">Rating: {activeReview.rating}/5</div>
+//             <span className="quote-mark">“</span>
+//             <p className="fade-in" key={activeReview.id}>
+//               {activeReview.comment}
+//             </p>
+//             <div className="stars">
+//               {"★".repeat(activeReview.rating)}{"☆".repeat(5 - activeReview.rating)}
+//             </div>
+//           </div>
+//         </div>
+//       </section>
+//     </div>
+//   );
+// };
 
-export default Department;
+// export default Department;

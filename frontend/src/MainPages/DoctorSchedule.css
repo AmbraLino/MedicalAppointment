@@ -1,0 +1,70 @@
+.calendar-container {
+    max-width: 950px;
+    margin: 40px auto;
+    padding: 25px;
+    background: #fdfdfd;
+}
+
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 12px;
+}
+
+.day-header {
+    background-color: #1e40af; /* Blu e errët */
+    color: #ffffff !important;
+    padding: 12px 5px;
+    text-align: center;
+    border-radius: 6px;
+    font-weight: 800;
+    font-size: 13px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+}
+
+.slot-btn {
+    min-height: 80px;
+    padding: 10px 5px;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: 0.2s;
+    width: 100%;
+}
+
+.slot-time { font-weight: 700; font-size: 14px; }
+.slot-label { font-size: 10px; text-transform: uppercase; margin-bottom: 4px; }
+
+.patient-name-label {
+    font-size: 10px;
+    color: #4b5563;
+    font-style: italic;
+    border-top: 1px solid rgba(0,0,0,0.1);
+    width: 90%;
+    padding-top: 4px;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.slot-btn.free { background-color: #fff; color: #334155; }
+.slot-btn.free:hover { border-color: #22c55e; background-color: #f0fdf4; }
+
+.slot-btn.busy { 
+    background-color: #eff6ff; 
+    border-color: #3b82f6; 
+    color: #1d4ed8; 
+    cursor: not-allowed;
+}
+
+.slot-btn.pending { 
+    background-color: #fffbeb; 
+    border-color: #f59e0b; 
+    color: #b45309; 
+    cursor: not-allowed;
+}

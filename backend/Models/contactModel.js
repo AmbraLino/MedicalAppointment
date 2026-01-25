@@ -1,22 +1,15 @@
-const mongoose = require("mongoose")
+const mongoose = require('mongoose');
 
 const contactSchema = new mongoose.Schema({
-    firstName:{
-        type: String,
-        required: true,
-    },
-    lastName:{
-        type: String,
-         required: true,
-    },
-    email:{
-        type: String,
-         required: true,
-    },
-    sms:{
-        type: String,
-        required: true, 
-    }
-})
-const Contact = mongoose.model("Contact", contactSchema)
-module.exports = Contact
+  fullName: { type: String, required: true },
+  phoneNumber: { type: String, required: true },
+  medicalRecordNumber: String,
+  reasonForVisit: String,
+  department: String,
+  doctorId: String, 
+  preferredDate: { type: String, required: true }, // Monday, Tuesday...
+  preferredTime: { type: String, required: true }, // 09:00, 10:00...
+  status: { type: String, default: 'pending' }     // pending, approved, rejected
+});
+
+module.exports = mongoose.model('Contact', contactSchema);
