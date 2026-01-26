@@ -5,7 +5,7 @@ const salt = bcrypt.genSaltSync(10);
 const createAdmin = async () => {
   try {
     await mongoose.connect("connection with DB");
-    const adminEmail = "barkea@admin.com";
+    const adminEmail = "admin@pro.com";
     const existingAdmin = await User.findOne({ email: adminEmail });
     if (existingAdmin) {
       console.log("Ky admin ekziston");
@@ -14,8 +14,8 @@ const createAdmin = async () => {
     }
     const admin = new User({
       username: "admin",
-      email: "barkea@admin.com",
-      password: bcrypt.hashSync("admintest10", salt),
+      email: "admin@pro.com",
+      password: bcrypt.hashSync("admin10", salt),
       role: "admin",
     });
     await admin.save();

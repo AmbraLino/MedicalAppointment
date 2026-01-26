@@ -33,7 +33,6 @@ app.use("/Images", express.static(path.join(__dirname, "Images")));
 app.use("/user", userApp);
 app.use("/contact", contactApp);
 app.use("/admin", adminApp);
-// app.use("/agent", agentApp);
 app.use("/product", productApp);
 app.use("/order", orderApp);
 app.use("/agent", agentOrderRoute);

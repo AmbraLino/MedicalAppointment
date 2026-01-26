@@ -14,31 +14,32 @@ const Contact = () => {
     preferredDate: '',
     preferredTime: ''
   });
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      // Dërgimi i të dhënave në Backend
-      const response = await axios.post("http://localhost:5000/contact", formData);
-      
-      if (response.status === 201 || response.status === 200) {
-        alert("Rezervimi u dërgua me sukses në sistem!");
-        // Pastrimi i formës pas suksesit
-        setFormData({
-          fullName: '',
-          phoneNumber: '',
-          medicalRecordNumber: '',
-          reasonForVisit: '',
-          department: '',
-          preferredDate: '',
-          preferredTime: ''
-        });
-      }
-    } catch (error) {
-      console.error("Gabim gjatë dërgimit:", error.response?.data || error.message);
-      alert("Ndodhi një gabim: " + (error.response?.data?.error || "Kontrolloni serverin"));
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  try {
+    // Shto withCredentials këtu poshtë
+    const response = await axios.post("http://localhost:5000/contact", formData, {
+      withCredentials: true 
+    });
+    
+    if (response.status === 201 || response.status === 200) {
+      alert("Rezervimi u dërgua me sukses në sistem!");
+      setFormData({
+        fullName: '',
+        phoneNumber: '',
+        medicalRecordNumber: '',
+        reasonForVisit: '',
+        department: '',
+        preferredDate: '',
+        preferredTime: ''
+      });
     }
-  };
+  } catch (error) {
+    // Këtu do të shohësh nëse është 401 apo 500
+    console.error("Gabim gjatë dërgimit:", error.response?.status, error.response?.data);
+    alert("Ndodhi një gabim: " + (error.response?.data?.message || "Kontrolloni autorizimin"));
+  }
+};
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });

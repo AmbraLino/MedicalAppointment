@@ -1,9 +1,5 @@
 import React, { useState } from 'react';
 import { Carousel } from 'react-bootstrap';
-// import logo from '../Images/barkea_logo_transparent.png';
-// import home1 from "../Images/home1.jpg";
-// import home22 from "../Images/home22.jpg";
-// import vilaPushimi1 from "../Images/vilaPushimi1.jpg";
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import "./Register.css"; 

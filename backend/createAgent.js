@@ -13,8 +13,8 @@ const salt = bcrypt.genSaltSync(10);
 const hashedPassword = bcrypt.hashSync("agjent10", salt);
 
 const agent = new userModel({
-  username: "Agent Barkea",
-  email: "agjent@barkea.com",
+  username: "agent",
+  email: "agjent@pro.com",
   password: hashedPassword,
   role: "agent",
 });
