@@ -4,7 +4,6 @@ import { Container, Row, Col, Card, Button } from "react-bootstrap";
 import { FaFacebook, FaLinkedin, FaTwitter } from "react-icons/fa";
 import "./FindDoctor.css";
 
-// Static hero image ONLY
 import background_Doctor from "../Images/findDoc1.PNG";
 
 const FindDoctor = () => {
@@ -23,7 +22,7 @@ const FindDoctor = () => {
     "Neurology",
   ];
 
-  // 🔥 FETCH DOCTORS FROM BACKEND
+//getting doctors nga backendi
   useEffect(() => {
     const fetchDoctors = async () => {
       try {
@@ -38,7 +37,7 @@ const FindDoctor = () => {
     fetchDoctors();
   }, []);
 
-  // 🔍 FILTER FROM URL SEARCH
+ 
   useEffect(() => {
     const params = new URLSearchParams(location.search);
     const searchQuery = params.get("search")?.toLowerCase();
@@ -51,7 +50,7 @@ const FindDoctor = () => {
     }
   }, [location]);
 
-  // 🧠 FILTER LOGIC
+  
   const filteredDoctors = doctors.filter((doc) => {
     const params = new URLSearchParams(location.search);
     const searchQuery = params.get("search")?.toLowerCase() || "";
@@ -75,7 +74,7 @@ const FindDoctor = () => {
 
   return (
     <div className="find-doctor-page">
-      {/* HERO SECTION */}
+
       <section className="doctor-hero">
         <Container>
           <Row className="align-items-center">
@@ -142,15 +141,14 @@ const FindDoctor = () => {
                     {doc.description}
                   </Card.Text>
 
-                  <Button
-                    variant="primary"
-                    className="mt-auto mb-3 fw-bold"
-                    onClick={() =>
-                      navigate(`/doctor-schedule/${doc._id}`)
-                    }
-                  >
-                    Book Appointment
-                  </Button>
+                 <Button
+  variant="primary"
+  className="mt-auto mb-3 fw-bold"
+  onClick={() => navigate(`/doctor-schedule/${doc._id}`)}
+>
+  Book Appointment
+</Button>
+
 
                   <div className="social-icons">
                     <FaFacebook className="me-2" />

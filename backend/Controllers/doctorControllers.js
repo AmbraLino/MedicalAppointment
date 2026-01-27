@@ -1,6 +1,5 @@
 const Doctor = require("../Models/doctorModel");
 
-// GET all doctors
 const getDoctors = async (req, res) => {
   try {
     const doctors = await Doctor.find();
@@ -10,7 +9,6 @@ const getDoctors = async (req, res) => {
   }
 };
 
-// GET single doctor by ID
 const getDoctorById = async (req, res) => {
   try {
     const doctor = await Doctor.findById(req.params.id);
@@ -21,7 +19,6 @@ const getDoctorById = async (req, res) => {
   }
 };
 
-// CREATE
 const createDoctor = async (req, res) => {
   try {
     const doctor = await Doctor.create(req.body);
@@ -31,7 +28,6 @@ const createDoctor = async (req, res) => {
   }
 };
 
-// UPDATE
 const updateDoctor = async (req, res) => {
   try {
     const updated = await Doctor.findByIdAndUpdate(req.params.id, req.body, { new: true });
@@ -42,7 +38,7 @@ const updateDoctor = async (req, res) => {
   }
 };
 
-// DELETE
+
 const deleteDoctor = async (req, res) => {
   try {
     const deleted = await Doctor.findByIdAndDelete(req.params.id);
@@ -53,5 +49,4 @@ const deleteDoctor = async (req, res) => {
   }
 };
 
-// ✅ Export all functions
 module.exports = { getDoctors, getDoctorById, createDoctor, updateDoctor, deleteDoctor };

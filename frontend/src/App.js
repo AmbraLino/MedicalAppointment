@@ -24,6 +24,7 @@ import ReadOne from "./MainPages/ReadOne";
 import FindDoctor from "./MainPages/FindDoctor";
 import Booking from "./MainPages/Booking";
 import AdminDoctorForm from "./Admin/AdminDoctorForm";
+
 function App() {
   return (
     <UserContextProvider>
@@ -40,11 +41,13 @@ function App() {
       <Route path="/admin/doctors" element={<AdminDoctorPanel />} />
 <Route path="/admin/create" element={<AdminDoctorForm />} />
 <Route path="/admin/update/:id" element={<AdminDoctorForm />} />
+<Route path="/doctor-schedule/:id" element={<DoctorSchedule />} />
+<Route path="/booking" element={<Booking />} />
 
 
         {/* protected routes */}
         <Route element={<ProtectedRoute allowedRoles={['doctor', 'admin']} />}>
-          <Route path="/doctorDashboard" element={<DoctorDashboard />} />
+          <Route path="/doctor/doctorDashboard" element={<DoctorDashboard />} />
         </Route>
 
         <Route element={<ProtectedRoute allowedRoles={['admin']} />}>

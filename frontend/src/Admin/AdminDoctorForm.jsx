@@ -4,7 +4,7 @@ import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 
 const AdminDoctorForm = () => {
-  const { id } = useParams(); // if editing
+  const { id } = useParams(); 
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
@@ -15,7 +15,6 @@ const AdminDoctorForm = () => {
     image: "",
   });
 
-  // 🔥 Load doctor for editing
   useEffect(() => {
     if (id) {
       axios.get(`http://localhost:5000/api/doctors/${id}`)
