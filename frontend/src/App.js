@@ -12,7 +12,7 @@ import Categories from "./MainPages/Categories";
 import Create from "./Admin/Create";
 import Read from "./Admin/Read";
 import Update from "./Admin/Update";
-import AdminPanel from "./Admin/AdminPanel";
+import AdminDoctorPanel from "./Admin/AdminDoctorPanel";
 import ProtectedRoute from './Auth/ProtectedRoute';
 import { UserContextProvider } from "./Auth/UserContext";
 import AgjentPanel from "./Agjent/AgjentPanel"; 
@@ -23,6 +23,7 @@ import UserProfile from "./User/UserProfile";
 import ReadOne from "./MainPages/ReadOne";
 import FindDoctor from "./MainPages/FindDoctor";
 import Booking from "./MainPages/Booking";
+import AdminDoctorForm from "./Admin/AdminDoctorForm";
 function App() {
   return (
     <UserContextProvider>
@@ -36,14 +37,18 @@ function App() {
         <Route path="/categories" element={<Categories />} />
         <Route path="/finddoctor" element={<FindDoctor />} />
         <Route path="/profile" element={<UserProfile />} />
-        
-        {/* protected routess*/}
+      <Route path="/admin/doctors" element={<AdminDoctorPanel />} />
+<Route path="/admin/create" element={<AdminDoctorForm />} />
+<Route path="/admin/update/:id" element={<AdminDoctorForm />} />
+
+
+        {/* protected routes */}
         <Route element={<ProtectedRoute allowedRoles={['doctor', 'admin']} />}>
           <Route path="/doctorDashboard" element={<DoctorDashboard />} />
         </Route>
 
         <Route element={<ProtectedRoute allowedRoles={['admin']} />}>
-          <Route path="/adminPanel" element={<AdminPanel />} />
+          <Route path="/adminDoctorPanel" element={<AdminDoctorPanel />} />
         </Route>
       </Routes>
       <Footer />

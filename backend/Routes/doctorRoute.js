@@ -4,16 +4,20 @@ const {
   createDoctor,
   getDoctors,
   updateDoctor,
+  getDoctorById,
   deleteDoctor,
-} = require("../controllers/doctorController");
+} = require("../Controllers/doctorControllers");
 const { verifyToken, isAdmin } = require("../middleware/auth");
 
 // PUBLIC
 router.get("/", getDoctors);
+// GET single doctor by ID
+router.get("/:id", getDoctorById);
+
 
 // ADMIN ONLY
-router.post("/", verifyToken, isAdmin, createDoctor);
-router.put("/:id", verifyToken, isAdmin, updateDoctor);
-router.delete("/:id", verifyToken, isAdmin, deleteDoctor);
+router.post("/", createDoctor);
+router.put("/:id", updateDoctor);
+router.delete("/:id", deleteDoctor);
 
 module.exports = router;
