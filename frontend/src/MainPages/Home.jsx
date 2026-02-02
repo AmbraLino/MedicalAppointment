@@ -116,32 +116,32 @@ const Home = () => {
     <h2>Our Values</h2>
     <div class="values-container">
         
-        <div class="value-card">
-            <div class="icon"><span>❤</span></div>
+        <div className="value-card">
+            <div className="icon"><span>❤</span></div>
             <h3>Compassion</h3>
             <p>We understand that seeking medical care can be a stressful and sensitive experience.</p>
         </div>
 
-        <div class="value-card">
-            <div class="icon"><span>⭐</span></div>
+        <div className="value-card">
+            <div className="icon"><span>⭐</span></div>
             <h3>Excellence</h3>
             <p>We are committed to providing superior medical care and service to our patients.</p>
         </div>
 
-        <div class="value-card">
-            <div class="icon"><span>🛡️</span></div>
+        <div className="value-card">
+            <div className="icon"><span>🛡️</span></div>
             <h3>Integrity</h3>
             <p>We believe in practicing medicine with integrity and honesty.</p>
         </div>
 
-        <div class="value-card">
-            <div class="icon"><span>🤝</span></div>
+        <div className="value-card">
+            <div className="icon"><span>🤝</span></div>
             <h3>Respect</h3>
             <p>We treat all individuals with respect and dignity, regardless of their background.</p>
         </div>
 
-        <div class="value-card">
-            <div class="icon"><span>👥</span></div>
+        <div className="value-card">
+            <div className="icon"><span>👥</span></div>
             <h3>Teamwork</h3>
             <p>We believe in working collaboratively with our team members.</p>
         </div>

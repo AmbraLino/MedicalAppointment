@@ -7,7 +7,9 @@ import { useNavigate } from "react-router-dom";
 const Create = () => {
   const navigate = useNavigate();
   const [doctor, setDoctor] = useState({
-    name: "",
+    username: "",
+    email: "",
+    password: "",
     specialty: "",
     department: "",
     image: null,
@@ -60,7 +62,7 @@ const Create = () => {
         <Form onSubmit={handleSubmit} encType="multipart/form-data">
           <Form.Group className="mb-3">
             <Form.Label>Name</Form.Label>
-            <Form.Control type="text" name="name" value={doctor.name} onChange={handleChange} />
+            <Form.Control type="text" name="name" value={doctor.username} onChange={handleChange} />
           </Form.Group>
 
           <Form.Group className="mb-3">

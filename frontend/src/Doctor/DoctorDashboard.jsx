@@ -1,40 +1,48 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext, useCallback } from "react";
 import { Table, Button, Badge, Container } from "react-bootstrap";
 import axios from "axios";
 import { UserContext } from "../Auth/UserContext";
 
 const DoctorDashboard = () => {
   const [appointments, setAppointments] = useState([]);
-  const { userInfo } = useContext(UserContext); //perdorim user context per t marr doktorrin e loguar (might change this)
+  const { userInfo } = useContext(UserContext);
 
+  // 1. Definojmë funksionin për të marrë të dhënat jashtë useEffect që ta përdorim kudo
+  // Përdorim useCallback që të mos krijohet si funksion i ri në çdo render
+ const fetchAppointments = useCallback(async () => {
+  try {
+    const response = await axios.get("http://localhost:5000/booking/doctor-list", {
+      withCredentials: true 
+    });
+    setAppointments(response.data);
+  } catch (err) {
+    console.error("GABIMI I REZERVIMEVE:", err.response?.status); // Nëse del 401, fajin e ka Logini
+  }
+}, []);
 
-  const fetchAppointments = async () => {
-    if (!userInfo?._id) return;
-    try {
-      const res = await axios.get(
-        `http://localhost:5000/booking/doctor/${userInfo._id}`,
-        { withCredentials: true }
-      );
-      setAppointments(res.data);
-    } catch (error) {
-      console.error("Gabim gjatë marrjes së takimeve:", error);
+  // 2. Thirrja e parë kur ngarkohet komponenti ose kur userInfo ndryshon
+  useEffect(() => {
+    if (userInfo && userInfo._id) {
+      fetchAppointments();
     }
-  };
+  }, [userInfo, fetchAppointments]);
 
-//funks per perditsimin e statusit
+  // 3. Funksioni për përditësimin e statusit
   const handleStatusUpdate = async (id, newStatus) => {
     try {
-      await axios.patch(`http://localhost:5000/booking/update/${id}`, { status: newStatus });
+      await axios.patch(
+        `http://localhost:5000/booking/update/${id}`,
+        { status: newStatus }, 
+        { withCredentials: true }
+      );
+
       alert(`Takimi u ${newStatus === 'approved' ? 'aprovua' : 'refuzua'}!`);
-      fetchAppointments(); 
+      fetchAppointments(); // Tani ky funksion është i aksesueshëm këtu
     } catch (error) {
-      console.error("Gabim gjatë përditësimit:", error);
+      console.error("Gabim gjatë përditësimit:", error.response?.data || error.message);
+      alert(error.response?.data?.message || "Nuk keni autorizim për këtë veprim.");
     }
   };
-
-  useEffect(() => {
-    fetchAppointments();
-  }, [userInfo]);
 
   return (
     <Container className="mt-5">
@@ -54,7 +62,7 @@ const DoctorDashboard = () => {
           </tr>
         </thead>
         <tbody>
-          {appointments.length > 0 ? (
+          {Array.isArray(appointments) && appointments.length > 0 ? (
             appointments.map(app => (
               <tr key={app._id}>
                 <td>{app.fullName}</td>

@@ -1,5 +1,5 @@
 .calendar-container {
-    max-width: 950px;
+    max-width: 1000px;
     margin: 40px auto;
     padding: 25px;
     background: #fdfdfd;
@@ -7,8 +7,14 @@
 
 .calendar-grid {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 12px;
+    grid-template-columns: repeat(5, 1fr); /* 5 kolona për 5 ditë */
+    gap: 15px;
+}
+
+.day-column {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
 .day-header {
@@ -20,7 +26,7 @@
     font-weight: 800;
     font-size: 13px;
     text-transform: uppercase;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
 }
 
 .slot-btn {
@@ -32,12 +38,13 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    transition: 0.2s;
+    transition: all 0.2s ease-in-out;
     width: 100%;
+    cursor: pointer;
 }
 
-.slot-time { font-weight: 700; font-size: 14px; }
-.slot-label { font-size: 10px; text-transform: uppercase; margin-bottom: 4px; }
+.slot-time { font-weight: 700; font-size: 15px; }
+.slot-label { font-size: 11px; text-transform: uppercase; margin-bottom: 4px; }
 
 .patient-name-label {
     font-size: 10px;
@@ -46,25 +53,39 @@
     border-top: 1px solid rgba(0,0,0,0.1);
     width: 90%;
     padding-top: 4px;
+    margin-top: 4px;
     text-align: center;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 }
 
-.slot-btn.free { background-color: #fff; color: #334155; }
-.slot-btn.free:hover { border-color: #22c55e; background-color: #f0fdf4; }
+/* Gjendja: Lirë */
+.slot-btn.free { 
+    background-color: #ffffff; 
+    color: #334155; 
+}
+.slot-btn.free:hover { 
+    border-color: #22c55e; 
+    background-color: #f0fdf4; 
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+}
 
+/* Gjendja: Zënë (Approved) */
 .slot-btn.busy { 
     background-color: #eff6ff; 
     border-color: #3b82f6; 
     color: #1d4ed8; 
     cursor: not-allowed;
+    opacity: 0.8;
 }
 
+/* Gjendja: Në pritje (Pending) */
 .slot-btn.pending { 
     background-color: #fffbeb; 
     border-color: #f59e0b; 
     color: #b45309; 
     cursor: not-allowed;
+    opacity: 0.9;
 }

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom"; 
+import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
-import "./DoctorSchedule.css"; 
+import "./DoctorSchedule.css";
 
 const DoctorSchedule = () => {
   const { id } = useParams();
@@ -10,37 +10,54 @@ const DoctorSchedule = () => {
 
   useEffect(() => {
     axios.get(`http://localhost:5000/booking/doctor-schedule/${id}`)
-      .then(res => setAppointments(res.data))
-      .catch(err => console.log("Gabim gjatë marrjes së takimeve:", err));
+      .then(res => {console.log("Të dhënat u morën me sukses:", res.data);
+        setAppointments(res.data);
+      })
+      .catch(err => 
+        console.log("Gabim gjatë marrjes së takimeve:", err));
   }, [id]);
 
   const days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"];
-  const hours = ["09:00","10:00","11:00","12:00","13:00","14:00","15:00"];
+  const hours = ["09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00"];
 
   const handleSlotClick = (day, hour) => {
     navigate("/booking", { state: { selectedDate: day, selectedTime: hour, docId: id } });
   };
 
   return (
-    <div className="calendar-container">
-      <h2>Doctor's Hours</h2>
+    <div className="calendar-container shadow-sm rounded border">
+      <h2 className="text-center mb-4">Orari i Vizitave</h2>
       <div className="calendar-grid">
         {days.map(day => (
-          <div key={day}>
-            <div>{day}</div>
+          <div key={day} className="day-column">
+            <div className="day-header">{day}</div>
             {hours.map(hour => {
-              const app = appointments.find(a => a.preferredDate === day && a.preferredTime === hour);
+              const app = appointments.find(a => a.preferredDate?.trim() === day.trim() && a.preferredTime === hour.trim());
               const isOccupied = app?.status === 'approved';
               const isPending = app?.status === 'pending';
+              
+              // Përcaktimi i klasës dinamike bazuar te statusi
+              let slotClass = "slot-btn free";
+              if (isOccupied) slotClass = "slot-btn busy";
+              if (isPending) slotClass = "slot-btn pending";
 
               return (
                 <button
                   key={hour}
-                  disabled={isOccupied || isPending}
-                  onClick={() => handleSlotClick(day, hour)}
+                  className={slotClass}
+                  // disabled={isOccupied || isPending}
+                  onClick={() => (isOccupied || isPending) ? null : handleSlotClick(day, hour)}
+      style={{ cursor: (isOccupied || isPending) ? 'not-allowed' : 'pointer' }}
                 >
-                  {hour} - {isOccupied ? "Busy" : isPending ? "Pending" : "Free"}
-                  {app?.fullName && ` | ${app.fullName}`}
+                  <span className="slot-time">{hour}</span>
+                  <span className="slot-label">
+                    {isOccupied ? "I zene" : isPending ? "Ne pritje" : "Lire"}
+                  </span>
+                  
+                  {/* Shfaq emrin e pacientit vetëm nëse është i zënë/pending */}
+                  {app?.fullName && (
+                    <span className="patient-name-label">{app.fullName}</span>
+                  )}
                 </button>
               );
             })}

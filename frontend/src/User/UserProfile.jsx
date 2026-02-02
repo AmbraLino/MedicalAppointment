@@ -6,15 +6,11 @@ import "./UserProfile.css";
 const UserProfile = () => {
   const { userInfo, setUserInfo, loading } = useContext(UserContext);
   const [formData, setFormData] = useState({
-    username: "",
-    email: "",
-    phone: "",
-    profilePic: ""
+    username: "", email: "", phone: "", image: ""
   });
   const [preview, setPreview] = useState("");
-
   const [reservations, setReservations] = useState([]);
-  const [loadingReservations, setLoadingReservations] = useState(true);
+  const [loadingRes, setLoadingRes] = useState(true);
 
   useEffect(() => {
     if (userInfo) {
@@ -22,30 +18,47 @@ const UserProfile = () => {
         username: userInfo.username || "",
         email: userInfo.email || "",
         phone: userInfo.phone || "",
-        profilePic: userInfo.profilePic || ""
+        image: userInfo.image || ""
       });
-      setPreview(userInfo.profilePic || "");
+      setPreview(userInfo.image || "");
     }
   }, [userInfo]);
 
   useEffect(() => {
     const fetchReservations = async () => {
       try {
-const res = await axios.get("http://localhost:5000/order/my", { withCredentials: true });
+        const res = await axios.get("http://localhost:5000/booking/my", { withCredentials: true });
         setReservations(res.data);
       } catch (err) {
-        console.error("Error loading reservations:", err);
+        console.error("Gabim gjatë ngarkimit:", err);
       } finally {
-        setLoadingReservations(false);
+        setLoadingRes(false);
       }
     };
-
     fetchReservations();
   }, []);
 
+  const handleDeleteBooking = async (bookingId) => {
+    if (window.confirm("A jeni të sigurt që dëshironi të anuloni këtë rezervim?")) {
+      try {
+        // Thirrja e rrugës DELETE në Backend
+        await axios.delete(`http://localhost:5000/booking/cancel/${bookingId}`, {
+          withCredentials: true
+        });
+
+        // Përditësimi i listës në ekran (UI)
+        setReservations(prev => prev.filter(item => item._id !== bookingId));
+        alert("Rezervimi u anulua!");
+      } catch (err) {
+        console.error("Gabim gjatë fshirjes:", err);
+        alert("Serveri u përgjigj me gabim. Sigurohu që Backend-i është i ndezur.");
+      }
+    }
+  };
+
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
+    setFormData(prev => ({ ...prev, [name]: value }));
   };
 
   const handleImageChange = (e) => {
@@ -54,7 +67,7 @@ const res = await axios.get("http://localhost:5000/order/my", { withCredentials:
       const reader = new FileReader();
       reader.onloadend = () => {
         setPreview(reader.result);
-        setFormData((prev) => ({ ...prev, profilePic: reader.result }));
+        setFormData(prev => ({ ...prev, image: reader.result }));
       };
       reader.readAsDataURL(file);
     }
@@ -63,18 +76,15 @@ const res = await axios.get("http://localhost:5000/order/my", { withCredentials:
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.put("http://localhost:5000/user", formData, {
-        withCredentials: true
-      });
+      const res = await axios.put("http://localhost:5000/user", formData, { withCredentials: true });
       setUserInfo(res.data);
-      alert("Profile updated!");
+      alert("Profili u përditësua!");
     } catch (err) {
-      console.error(err);
-      alert("Something went wrong while updating the profile.");
+      alert("Gabim gjatë ruajtjes.");
     }
   };
 
-  if (loading) return <p>Loading...</p>;
+  if (loading) return <div className="loading">Duke u ngarkuar...</div>;
 
   return (
     <div className="user-profile-wrapper">
@@ -82,71 +92,43 @@ const res = await axios.get("http://localhost:5000/order/my", { withCredentials:
         <h2>My Profile</h2>
         <form className="user-profile-form" onSubmit={handleSubmit}>
           <div className="profile-picture-wrapper">
-            <img
-              src={preview || "https://via.placeholder.com/150"}
-              alt="Profile"
-            />
+            <img src={preview || "/default-avatar.png"} alt="Profile" />
             <input type="file" accept="image/*" onChange={handleImageChange} />
           </div>
           <label>Username:</label>
-          <input
-            type="text"
-            name="username"
-            value={formData.username}
-            onChange={handleChange}
-            required
-          />
+          <input type="text" name="username" value={formData.username} onChange={handleChange} required />
           <label>Email:</label>
-          <input
-            type="email"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-            required
-          />
+          <input type="email" name="email" value={formData.email} onChange={handleChange} required />
           <label>Phone:</label>
-          <input
-            type="text"
-            name="phone"
-            value={formData.phone}
-            onChange={handleChange}
-          />
-          <button type="submit">Update Profile</button>
+          <input type="text" name="phone" value={formData.phone} onChange={handleChange} />
+          <button type="submit" className="update-button">Update Profile</button>
         </form>
       </div>
 
       <div className="reservations-column">
         <h2>My Reservations</h2>
-
-        {loadingReservations ? (
-          <p>Loading reservations...</p>
+        {loadingRes ? (
+          <p className="loading-msg">Duke ngarkuar rezervimet...</p>
         ) : reservations.length === 0 ? (
-          <div className="reservations-placeholder">
-            No reservations yet.
-          </div>
+          <div className="reservations-placeholder">Nuk u gjet asnjë rezervim.</div>
         ) : (
           <div className="reservations-list">
-            {reservations.map((resv) => (
-              <div className="reservation-card" key={resv._id}>
-                <h3>{resv.product?.name || "Property"}</h3>
-                <p><strong>Date:</strong> {resv.date}</p>
-                <p><strong>Time:</strong> {resv.time}</p>
-                <p>
-                  <strong>Status:</strong> 
-                  <span
-                    className={`status-tag ${
-                      resv.status === "Pranuar"
-                        ? "accepted"
-                        : resv.status === "Refuzuar"
-                        ? "rejected"
-                        : "pending"
-                    }`}
-                  >
-                    {resv.status}
+            {reservations.map((item) => (
+              <div key={item._id} className="reservation-card">
+                <div className="res-header">
+                  <h3>Dr. {item.doctor?.username || "I paemërtuar"}</h3>
+                  <span className={`status-badge ${item.status?.toLowerCase()}`}>
+                    {item.status}
                   </span>
-                </p>
-                {resv.agent && <p><strong>Agent:</strong> {resv.agent.username}</p>}
-                {resv.message && <p><strong>Agent Message:</strong> {resv.message}</p>}
+                </div>
+                <div className="res-details">
+                  <p><strong>Data:</strong> {item.preferredDate}</p>
+                  <p><strong>Ora:</strong> {item.preferredTime}</p>
+                  <p><strong>Pacienti:</strong> {item.fullName}</p>
+                  <button className="delete-res-btn" onClick={() => handleDeleteBooking(item._id)}>
+                    Anulo Rezervimin
+                  </button>
+                </div>
               </div>
             ))}
           </div>

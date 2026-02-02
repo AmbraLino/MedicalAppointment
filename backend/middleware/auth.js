@@ -18,10 +18,6 @@ const isAdmin = (req, res, next) => {
   next();
 };
 
-const isAgent = (req, res, next) => {
-  if (req.user.role !== "agent")
-    return res.status(403).json({ message: "Aksesohet vetem nga agjentet" });
-  next();
-};
 
-module.exports = { verifyToken, isAdmin, isAgent };
+
+module.exports = { verifyToken, isAdmin};

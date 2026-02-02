@@ -14,13 +14,12 @@ const userSchema = new mongoose.Schema({
     },
     role: {
         type: String,
-        enum: ["user", "admin", "agent"],
+        enum: ["user", "admin", "doctor"],
         default: "user"
     },
- phone: { type: String },
-profilePic: { type: String },
-
-
+    phone: { type: String },
+    profilePic: { type: String },
+    department: { type: String }
 
 },
     { timestamps: true })

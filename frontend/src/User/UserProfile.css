@@ -1,26 +1,45 @@
 .user-profile-wrapper {
   display: flex;
-  max-width:100%;
-  height: auto;
+  max-width: 100%;
+  min-height: 85vh;
   margin: 50px auto;
   background-color: #606C38; 
   border-radius: 15px;
   overflow: hidden;
   box-shadow: 0 8px 25px rgba(0,0,0,0.25);
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  color: #283618;
+  color: #021e24;
+}
+/* Rregullo klasën ekzistuese */
+.update-button {
+  width: 100%;
+  padding: 12px;
+  color: #ffffff; /* Bardhë e pastër */
+  background-color: #BC6C25; /* Ngjyrë që përshtatet me paletën tënde (Terrakotë) */
+  font-weight: 700;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  margin-top: 10px;
 }
 
+.update-button:hover {
+  background-color: #DDA15E; /* Ngjyrë më e hapur në hover */
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
 
 .profile-column {
   flex: 1;
   padding: 40px 30px;
-  background-color: #283618; 
+  background-color: #135859; 
 }
 
 .profile-column h2 {
   text-align: center;
-  color: #BC6C25; 
+  color: #c2cbd7; 
   margin-bottom: 30px;
   font-size: 28px;
 }
@@ -59,52 +78,98 @@
   border-radius: 8px;
   background-color: #fefae0;
   font-size: 14px;
-  transition: border 0.3s;
 }
 
-.user-profile-form input:focus {
-  outline: none;
-  border-color: #FEFA05; 
-}
-
-.user-profile-form button {
+.update-button {
   width: 100%;
   padding: 12px;
-  background-color: #DDA15E;
-  color: #283618;
-  font-weight: 600;
+  color: #f3eee8;
+  background-color: #466a9f;
+  font-weight: 700;
   border: none;
   border-radius: 8px;
   cursor: pointer;
   font-size: 16px;
-  transition: background 0.3s, transform 0.2s;
+  transition: all 0.3s;
 }
 
-.user-profile-form button:hover {
-  background-color: #BC6C25; 
-  transform: scale(1.05);
+.update-button:hover {
+  background-color: #25bca5; 
+  transform: translateY(-2px);
 }
 
 .reservations-column {
-  flex: 1;
+  flex: 1.2;
   padding: 40px 30px;
-  background-color: #606C38;
-  border-left: 2px solid #FEFA05; 
+  background-color: #145792;
+  border-left: 2px solid #5eb3dd; 
 }
 
 .reservations-column h2 {
-  color: #DDA15E; 
+  color: #FEFAE0; 
   text-align: center;
   font-size: 26px;
   margin-bottom: 20px;
 }
 
+.reservations-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.reservation-card {
+  background-color: #FEFAE0;
+  border-radius: 10px;
+  padding: 15px;
+  border-left: 6px solid #5eaedd;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.status-tag {
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.status-tag.accepted { background-color: #283618; color: #FEFAE0; }
+.status-tag.rejected { background-color: #780000; color: #FEFAE0; }
+.status-tag.pending { background-color: #DDA15E; color: #283618; }
+
+.doctor-reply {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px dashed #BC6C25;
+  font-style: italic;
+  font-size: 13px;
+}
+.delete-res-btn {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background 0.3s;
+}
+
+.delete-res-btn:hover {
+  background-color: #a71d2a;
+}
 .reservations-placeholder {
-  height: 500px;
-  border: 2px dashed #DDA15E; 
+  height: 300px;
+  border: 2px dashed #FEFAE0;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #DDA15E; 
- font-size: 16px;
+  color: #FEFAE0;
 }

@@ -106,3 +106,28 @@
 .booking-card {
     animation: fadeIn 0.5s ease-out;
 }
+/* Përditësimi për butonin kryesor */
+.btn-primary {
+    background: #2563eb !important;
+    border: none !important;
+    border-radius: 10px !important;
+    font-weight: 700 !important;
+    margin-top: 20px; /* Shtuar hapësirë më shumë sipër */
+    transition: all 0.3s ease !important;
+}
+
+/* Stili për butonin Back */
+.btn-outline-secondary {
+    border: 2px solid #e2e8f0 !important;
+    color: #64748b !important;
+    border-radius: 10px !important;
+    font-weight: 600 !important;
+    margin-top: 10px;
+    background: transparent !important;
+}
+
+.btn-outline-secondary:hover {
+    background: #f8fafc !important;
+    border-color: #cbd5e1 !important;
+    color: #475569 !important;
+}

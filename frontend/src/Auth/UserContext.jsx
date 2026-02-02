@@ -3,29 +3,28 @@ import axios from "axios";
 
 export const UserContext = createContext({});
 
-export const UserContextProvider = ({ children }) => {
+export function UserContextProvider({ children }) {
   const [userInfo, setUserInfo] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [ready, setReady] = useState(false);
 
   useEffect(() => {
-    const fetchUser = async () => {
-      try {
-        const res = await axios.get("http://localhost:5000/user", {
-          withCredentials: true,
+    // Kur hapet faqja, kontrollojmë nëse kemi cookie të vlefshme
+    if (!userInfo) {
+      axios.get("http://localhost:5000/user/profile", { withCredentials: true })
+        .then(({ data }) => {
+          setUserInfo(data);
+          setReady(true);
+        })
+        .catch(() => {
+          setUserInfo(null);
+          setReady(true);
         });
-        setUserInfo(res.data);
-      } catch (err) {
-        setUserInfo(null);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchUser();
+    }
   }, []);
 
   return (
-    <UserContext.Provider value={{ userInfo, setUserInfo, loading }}>
+    <UserContext.Provider value={{ userInfo, setUserInfo, ready }}>
       {children}
     </UserContext.Provider>
   );
-};
+}

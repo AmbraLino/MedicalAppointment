@@ -12,38 +12,58 @@ const getDoctors = async (req, res) => {
 const getDoctorById = async (req, res) => {
   try {
     const doctor = await Doctor.findById(req.params.id);
-    if (!doctor) return res.status(404).json({ message: "Doctor not found" });
     res.status(200).json(doctor);
   } catch (err) {
-    res.status(500).json({ message: err.message });
+    res.status(404).json({ message: "Doctor not found" });
   }
 };
+
+const bcrypt = require("bcrypt"); // Shtoje këtë në fillim
 
 const createDoctor = async (req, res) => {
   try {
-    const doctor = await Doctor.create(req.body);
-    res.status(201).json(doctor);
+    const { username, email, password, specialty, department, description } = req.body;
+    const image = req.file ? req.file.filename : "";
+
+    // Hash fjalëkalimin!
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(password, salt);
+
+    const newDoctor = new Doctor({
+      username, // Modeli kërkon username, jo name
+      email,
+      password: hashedPassword,
+      role: "doctor",
+      specialty,
+      department,
+      description,
+      image
+    });
+
+    await newDoctor.save();
+    res.status(201).json(newDoctor);
   } catch (err) {
-    res.status(400).json({ message: err.message });
+    res.status(400).json({ message: "Gabim gjatë krijimit: " + err.message });
   }
 };
-
 const updateDoctor = async (req, res) => {
   try {
-    const updated = await Doctor.findByIdAndUpdate(req.params.id, req.body, { new: true });
-    if (!updated) return res.status(404).json({ message: "Doctor not found" });
+    const updateData = { ...req.body };
+    if (req.file) {
+      updateData.image = req.file.filename; // Nëse po ngarkojmë foto të re
+    }
+
+    const updated = await Doctor.findByIdAndUpdate(req.params.id, updateData, { new: true });
     res.status(200).json(updated);
   } catch (err) {
     res.status(400).json({ message: err.message });
   }
 };
 
-
 const deleteDoctor = async (req, res) => {
   try {
-    const deleted = await Doctor.findByIdAndDelete(req.params.id);
-    if (!deleted) return res.status(404).json({ message: "Doctor not found" });
-    res.status(200).json({ message: "Doctor deleted" });
+    await Doctor.findByIdAndDelete(req.params.id);
+    res.status(200).json({ message: "Deleted" });
   } catch (err) {
     res.status(400).json({ message: err.message });
   }

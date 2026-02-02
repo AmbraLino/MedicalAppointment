@@ -1,106 +1,104 @@
-import React, { useState, useEffect } from "react";
-import { Form, Button, Container } from "react-bootstrap";
+import React, { useState } from "react";
 import axios from "axios";
-import { useNavigate, useParams } from "react-router-dom";
+import { Container, Form, Button, Alert } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 
 const AdminDoctorForm = () => {
-  const { id } = useParams(); 
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [department, setDepartment] = useState("");
+  const [specialty, setSpecialty] = useState("");
+  const [bio, setBio] = useState("");
+  const [image, setImage] = useState(null);
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-
-  const [formData, setFormData] = useState({
-    name: "",
-    specialty: "",
-    department: "",
-    description: "",
-    image: "",
-  });
-
-  useEffect(() => {
-    if (id) {
-      axios.get(`http://localhost:5000/api/doctors/${id}`)
-        .then((res) => setFormData(res.data))
-        .catch(err => console.log(err));
-    }
-  }, [id]);
-
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setError("");
+    setLoading(true);
+
+    if (!username || !email || !password || !department) {
+      setError("Plotësoni të gjitha fushat e detyrueshme!");
+      setLoading(false);
+      return;
+    }
 
     try {
-      if (id) {
-        await axios.put(`http://localhost:5000/api/doctors/${id}`, formData);
-      } else {
-        await axios.post("http://localhost:5000/api/doctors", formData);
-      }
+      const formData = new FormData();
+      formData.append("username", username);
+      formData.append("email", email);
+      formData.append("password", password);
+      formData.append("department", department);
+      formData.append("specialty", specialty);
+      formData.append("bio", bio);
+      formData.append("role", "doctor"); // Shumë e rëndësishme
+      if (image) formData.append("image", image);
+
+      const response = await axios.post("http://localhost:5000/admin/create", formData, {
+        withCredentials: true,
+        headers: { "Content-Type": "multipart/form-data" },
+      });
+
+      alert("Doktori u krijua me sukses!");
       navigate("/admin/doctors");
     } catch (err) {
-      console.log(err);
+      console.error("Detajet e gabimit:", err.response?.data);
+      setError(err.response?.data?.message || "Gabim gjatë krijimit të doktorit.");
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
-    <Container style={{ maxWidth: "600px", marginTop: "30px" }}>
-      <h2>{id ? "Edit Doctor" : "Add New Doctor"}</h2>
+    <Container className="mt-5" style={{ maxWidth: "600px" }}>
+      <div className="p-4 shadow rounded bg-light">
+        <h2 className="mb-4 text-center text-primary">Regjistro Doktor të Ri</h2>
+        {error && <Alert variant="danger">{error}</Alert>}
+        
+        <Form onSubmit={handleSubmit} encType="multipart/form-data">
+          <Form.Group className="mb-3">
+            <Form.Label>Emri i Plotë *</Form.Label>
+            <Form.Control type="text" placeholder="Dr. Hohn DOe" onChange={(e) => setUsername(e.target.value)} />
+          </Form.Group>
 
-      <Form onSubmit={handleSubmit}>
-        <Form.Group className="mb-3">
-          <Form.Label>Name</Form.Label>
-          <Form.Control
-            name="name"
-            value={formData.name}
-            onChange={handleChange}
-            required
-          />
-        </Form.Group>
+          <Form.Group className="mb-3">
+            <Form.Label>Email *</Form.Label>
+            <Form.Control type="email" placeholder="doktori@email.com" onChange={(e) => setEmail(e.target.value)} />
+          </Form.Group>
 
-        <Form.Group className="mb-3">
-          <Form.Label>Specialty</Form.Label>
-          <Form.Control
-            name="specialty"
-            value={formData.specialty}
-            onChange={handleChange}
-            required
-          />
-        </Form.Group>
+          <Form.Group className="mb-3">
+            <Form.Label>Fjalëkalimi *</Form.Label>
+            <Form.Control type="password" placeholder="******" onChange={(e) => setPassword(e.target.value)} />
+          </Form.Group>
 
-        <Form.Group className="mb-3">
-          <Form.Label>Department</Form.Label>
-          <Form.Control
-            name="department"
-            value={formData.department}
-            onChange={handleChange}
-            required
-          />
-        </Form.Group>
+          <Form.Group className="mb-3">
+            <Form.Label>Departamenti *</Form.Label>
+            <Form.Control type="text" placeholder="Kardiologji" onChange={(e) => setDepartment(e.target.value)} />
+          </Form.Group>
 
-        <Form.Group className="mb-3">
-          <Form.Label>Description</Form.Label>
-          <Form.Control
-            name="description"
-            value={formData.description}
-            onChange={handleChange}
-            as="textarea"
-          />
-        </Form.Group>
+          <Form.Group className="mb-3">
+            <Form.Label>Specialiteti</Form.Label>
+            <Form.Control type="text" placeholder="Kirurg" onChange={(e) => setSpecialty(e.target.value)} />
+          </Form.Group>
 
-        <Form.Group className="mb-3">
-          <Form.Label>Image URL</Form.Label>
-          <Form.Control
-            name="image"
-            value={formData.image}
-            onChange={handleChange}
-            placeholder="Paste image URL"
-          />
-        </Form.Group>
+          <Form.Group className="mb-3">
+            <Form.Label>Bio</Form.Label>
+            <Form.Control as="textarea" rows={3} onChange={(e) => setBio(e.target.value)} />
+          </Form.Group>
 
-        <Button type="submit" variant="success">
-          {id ? "Update Doctor" : "Add Doctor"}
-        </Button>
-      </Form>
+          <Form.Group className="mb-3">
+            <Form.Label>Foto e Profitit</Form.Label>
+            <Form.Control type="file" accept="image/*" onChange={(e) => setImage(e.target.files[0])} />
+          </Form.Group>
+
+          <Button type="submit" variant="primary" className="w-100" disabled={loading}>
+            {loading ? "Duke u procesuar..." : "Regjistro Doktorin"}
+          </Button>
+        </Form>
+      </div>
     </Container>
   );
 };

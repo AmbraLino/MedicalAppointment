@@ -1,5 +1,3 @@
-
-
 import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -14,43 +12,29 @@ const Login = () => {
     const navigate = useNavigate();
     const { setUserInfo } = useContext(UserContext);
 
-    const handleLogin = async (e) => {
-        // Parandalojmë refresh-in e faqes nëse përdoret brenda një <form>
-        if(e) e.preventDefault();
-
-        if (!email || !password) {
-            setError("Ju lutem plotësoni email dhe fjalëkalimin");
-            return;
-        }
+   const handleLogin = async (e) => {
+        e.preventDefault();
+        setError("");
 
         try {
-            // 1. Thirrja e loginit
-            await axios.post(
+            // 1. Login - Serveri dërgon Set-Cookie në Header
+            const { data } = await axios.post(
                 "http://localhost:5000/user/login",
                 { email, password },
                 { withCredentials: true }
             );
 
-            // 2. Marrja e të dhënave të përdoruesit pas loginit të suksesshëm
-            const userRes = await axios.get("http://localhost:5000/user", { withCredentials: true });
-            const user = userRes.data;
-            
-            setUserInfo(user);
-
-            // 3. Ridrejtimi sipas Rolit (Këtu ndryshon logjika)
-            if (user.role === "admin") {
-                navigate("/adminPanel"); // Faqja e administratorit
-            } else if (user.role === "doctor") {
-                navigate("/doctorPanel"); // Faqja e doktorit (ish-agent)
-            } else if (user.role === "patient" || user.role === "user") {
-                navigate("/"); // Faqja kryesore për klientët
+            // 2. Vendosim userin në State
+            setUserInfo(data);
+            if (data.role === "admin") {
+                navigate("/admin/create", { replace: true });
+            } else if (data.role === "doctor") {
+                navigate("/doctor/doctorDashboard", { replace: true });
             } else {
-                navigate("/"); // Default
+                navigate("/", { replace: true });
             }
-
         } catch (err) {
-            console.error(err);
-            setError("Email ose fjalëkalim i gabuar. Provoni përsëri.");
+            setError(err.response?.data?.message || "Email ose fjalëkalim i gabuar.");
         }
     };
 
