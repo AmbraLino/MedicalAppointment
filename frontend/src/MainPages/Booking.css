@@ -19,7 +19,6 @@
     border: 1px solid #e1e8ed;
 }
 
-/* Titulli */
 .booking-card h2 {
     color: #1a3a8a;
     font-weight: 800;
@@ -49,7 +48,6 @@
     font-size: 1.25rem;
 }
 
-/* Inputet */
 .booking-card .form-label {
     color: #475569;
     margin-bottom: 8px;

@@ -19,10 +19,10 @@ const createAdmin = async () => {
       role: "admin",
     });
     await admin.save();
-    console.log("Admini u krijua:", admin.email);
+    console.log("Admin was created:", admin.email);
     mongoose.disconnect();
   } catch (err) {
-    console.log("Admini nuk u krijua " + err);
+    console.log("Admin was not created. " + err);
     process.exit(1);
   }
 };

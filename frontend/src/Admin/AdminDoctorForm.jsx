@@ -34,7 +34,7 @@ const AdminDoctorForm = () => {
       formData.append("department", department);
       formData.append("specialty", specialty);
       formData.append("bio", bio);
-      formData.append("role", "doctor"); // Shumë e rëndësishme
+      formData.append("role", "doctor"); 
       if (image) formData.append("image", image);
 
       const response = await axios.post("http://localhost:5000/admin/create", formData, {

@@ -14,7 +14,7 @@ const verifyToken = (req, res, next) => {
 
 const isAdmin = (req, res, next) => {
   if (req.user.role !== "admin")
-    return res.status(403).json({ message: "Aksesohet vetem nga admini" });
+    return res.status(403).json({ message: "Accessible only by admin" });
   next();
 };
 

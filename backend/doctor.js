@@ -7,7 +7,7 @@ const salt = bcrypt.genSaltSync(10);
 const createDoctors = async () => {
   try {
     await mongoose.connect( "mongodb+srv://MedicalSystem:2E8MxSqfXmAN2WNR@medicalcluster.hs25uwx.mongodb.net/?appName=MedicalCluster");
-    console.log("Lidhur me DB...");
+    console.log("is connected to DB...");
 
     for (let docData of doctors) {
       const existingDoc = await User.findOne({ email: docData.email });

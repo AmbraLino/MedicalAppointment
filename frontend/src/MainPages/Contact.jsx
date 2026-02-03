@@ -44,7 +44,6 @@ const handleSubmit = async (e) => {
 
   return (
     <div className="contact-page-wrapper">
-      {/* Hero Section */}
       <section className="contact-doctor-hero">
         <Container>
           <Row className="align-items-center">

@@ -66,7 +66,7 @@ function NavBar() {
                   <FontAwesomeIcon icon={faMagnifyingGlass} className="me-2" style={{ color: "white" }} /> 
                   <input
                     type="text"
-                    placeholder="Kërko..."
+                    placeholder="Search..."
                     value={search}
                     onChange={(e) => setSearch(e.target.value)}
                     onKeyDown={handleSearch}

@@ -41,7 +41,7 @@ const createDoctor = async (req, res) => {
     await newDoctor.save();
     res.status(201).json(newDoctor);
   } catch (err) {
-    res.status(400).json({ message: "Gabim gjatë krijimit: " + err.message });
+    res.status(400).json({ message: "Error during creation: " + err.message });
   }
 };
 const updateDoctor = async (req, res) => {

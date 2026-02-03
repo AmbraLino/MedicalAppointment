@@ -23,7 +23,7 @@ const Login = () => {
                 { withCredentials: true }
             );
 
-            // 2. Vendosim userin në State
+            //  Vendosim user ne state
             setUserInfo(data);
             if (data.role === "admin") {
                 navigate("/admin/create", { replace: true });

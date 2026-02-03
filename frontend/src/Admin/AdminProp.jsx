@@ -4,7 +4,7 @@ import { Card, Button } from "react-bootstrap";
 import axios from "axios";
 import { useParams, useNavigate, Link } from "react-router-dom";
 
-const AdminProp = ({ _id, name, description, photo, price, category }) => {
+const AdminProp = ({ _id, name, description, photo }) => {
   const { id } = useParams();
   const navItem = useNavigate();
   const [element, setElement] = useState({});
@@ -32,7 +32,6 @@ const AdminProp = ({ _id, name, description, photo, price, category }) => {
         <Card.Text className="text-muted text-center flex-grow-1">
           {description}
         </Card.Text>
-        <Card.Text className="text-center fw-bold">€{price}/muaj</Card.Text>
 
         <Button
           as={Link}
