@@ -1,21 +1,18 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
-// SHIKO KETU: Sigurohu që ky path është i saktë! 
-// Nëse skedari është te backend/models/user.js, liroje kështu:
 const User = require("./models/user"); 
 
 const salt = bcrypt.genSaltSync(10);
 
 const createDoctors = async () => {
   try {
-    // Zëvendësoje me URL-në tënde reale të MongoDB
     await mongoose.connect( "mongodb+srv://MedicalSystem:2E8MxSqfXmAN2WNR@medicalcluster.hs25uwx.mongodb.net/?appName=MedicalCluster");
     console.log("Lidhur me DB...");
 
     for (let docData of doctors) {
       const existingDoc = await User.findOne({ email: docData.email });
       if (existingDoc) {
-        console.log(`Doktori ${docData.email} ekziston.`);
+        console.log(`The doctor ${docData.email} exists.`);
         continue;
       }
 
@@ -24,17 +21,17 @@ const createDoctors = async () => {
         email: docData.email,
         password: bcrypt.hashSync(docData.password, salt),
         role: "doctor",
-        department: docData.dept // Sigurohu që modeli 'User' e ka këtë fushë
+        department: docData.dept // Sigurohemi qe modeli 'User' e ka kete fushe
       });
 
       await newDoctor.save();
-      console.log(`U krijua doktori: ${newDoctor.username} | ID: ${newDoctor._id}`);
+      console.log(`The doctor was created: ${newDoctor.username} | ID: ${newDoctor._id}`);
     }
 
-    console.log("Përfundoi!");
+    console.log("Finish!");
     mongoose.disconnect();
   } catch (err) {
-    console.error("GABIM:", err.message);
+    console.error("Error:", err.message);
     process.exit(1);
   }
 };

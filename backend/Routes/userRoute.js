@@ -69,12 +69,12 @@ router.post("/login", async (req, res) => {
     }
     
     if (!user || !user.password) {
-      return res.status(401).json({ message: "Email ose fjalëkalim i gabuar" });
+      return res.status(401).json({ message: "Incorrect email or password" });
     }
 
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
-      return res.status(401).json({ message: "Email ose fjalëkalim i gabuar" });
+      return res.status(401).json({ message: "Incorrect email or password" });
     }
 
     const token = jwt.sign(
@@ -91,7 +91,7 @@ router.post("/login", async (req, res) => {
 
   } catch (err) {
     console.error(err);
-    res.status(500).json({ message: "Gabim në server" });
+    res.status(500).json({ message: "Server error" });
   }
 });
 

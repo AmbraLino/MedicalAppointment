@@ -42,11 +42,11 @@ const AdminDoctorForm = () => {
         headers: { "Content-Type": "multipart/form-data" },
       });
 
-      alert("Doktori u krijua me sukses!");
+      alert("The doctor was successfully created.!");
       navigate("/admin/doctors");
     } catch (err) {
-      console.error("Detajet e gabimit:", err.response?.data);
-      setError(err.response?.data?.message || "Gabim gjatë krijimit të doktorit.");
+      console.error("Error details:", err.response?.data);
+      setError(err.response?.data?.message || "Error creating the doctor.");
     } finally {
       setLoading(false);
     }

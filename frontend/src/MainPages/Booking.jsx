@@ -44,15 +44,15 @@ const Booking = () => {
         withCredentials: true 
       });
 
-      console.log("Rezervimi u krijua:", response.data);
-      alert("Rezervimi u dërgua me sukses!");
+      console.log("The reservation was created:", response.data);
+      alert("Reservation sent successfully!");
       navigate("/");
     } catch (err) {
       if (err.response?.status === 401) {
-        alert("Sesioni juaj ka skaduar. Ju lutem logohuni përsëri.");
+        alert("Your session has expired. Please log in again..");
         navigate("/login");
       } else {
-        alert("Gabim: " + (err.response?.data?.message || "Smth wrong happend."));
+        alert("Error: " + (err.response?.data?.message || "Something went wrong."));
       }
     }
   };

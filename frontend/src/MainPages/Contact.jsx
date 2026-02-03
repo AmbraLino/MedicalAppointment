@@ -21,7 +21,7 @@ const handleSubmit = async (e) => {
     });
     
     if (response.status === 201 || response.status === 200) {
-      alert("Rezervimi u dërgua me sukses në sistem!");
+      alert("The reservation was successfully sent to the system!");
       setFormData({
         fullName: '',
         phoneNumber: '',

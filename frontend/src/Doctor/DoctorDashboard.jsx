@@ -13,7 +13,7 @@ const DoctorDashboard = () => {
     });
     setAppointments(response.data);
   } catch (err) {
-    console.error("GABIMI I REZERVIMEVE:", err.response?.status);
+    console.error("error while reservation:", err.response?.status);
   }
 }, []);
 
@@ -42,7 +42,7 @@ const DoctorDashboard = () => {
   return (
     <Container className="mt-5">
       <div className="d-flex justify-content-between align-items-center mb-4">
-        <h2 className="text-primary">Management panel - Dr. {userInfo?.username}</h2>
+        <h2 className="text-primary">Management panel -  {userInfo?.username}</h2>
         <Badge bg="info">ID: {userInfo?._id}</Badge>
       </div>
 
