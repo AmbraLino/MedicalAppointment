@@ -140,7 +140,7 @@
 
 .icon-left {
   position: absolute;
-  left: 15px;
+  left: 1px;
   pointer-events: none;
   z-index: 1;
 }

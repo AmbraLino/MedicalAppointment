@@ -12,4 +12,4 @@ const contactSchema = new mongoose.Schema({
   status: { type: String, default: 'pending' }  
 });
 
-module.exports = mongoose.model('Contact', contactSchema);
+module.exports = mongoose.model('Contact', contactSchema); 

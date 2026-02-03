@@ -139,6 +139,11 @@ const handleSubmit = async (e) => {
                       <option value="" disabled>Select department</option>
                       <option value="cardiology">Cardiology</option>
                       <option value="neurology">Neurology</option>
+                      <option value="pediatric">Pediatric</option>
+                      <option value="ophthalmology">Ophthalmology</option>
+                      <option value="occupationalTherapy">Occupational Therapy</option>
+                      <option value="physicalTherapy">Physical Therapy</option>
+
                     </select>
                     <span className="icon-right">▼</span>
                   </div>
@@ -149,7 +154,7 @@ const handleSubmit = async (e) => {
                 <div className="input-group">
                   <label>Preferred Date</label>
                   <div className="icon-input-wrapper">
-                    <span className="icon-left">📅</span>
+                    {/* <span className="icon-left">📅</span> */}
                     <input 
                       name="preferredDate"
                       type="date" 
@@ -162,7 +167,7 @@ const handleSubmit = async (e) => {
                 <div className="input-group">
                   <label>Preferred Time</label>
                   <div className="icon-input-wrapper">
-                    <span className="icon-left">🕒</span>
+                    {/* <span className="icon-left">🕒</span> */}
                     <input 
                       name="preferredTime"
                       type="time" 
@@ -193,15 +198,15 @@ const handleSubmit = async (e) => {
             <div className="contact-details">
               <div className="contact-item">
                 <h4>Phone</h4>
-                <p>+355 123 456 789</p>
+                <p>+0123-456-789</p>
               </div>
               <div className="contact-item">
                 <h4>Email Us</h4>
-                <p>contact@prohealth.com</p>
+                <p>prohealth@care.com</p>
               </div>
               <div className="contact-item">
                 <h4>Our Location</h4>
-                <p>Tiranë, Albania</p>
+                <p>London, UK</p>
               </div>
             </div>
           </div>

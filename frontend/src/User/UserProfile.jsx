@@ -154,7 +154,7 @@ const UserProfile = () => {
               <div key={item._id} className="reservation-card">
                 <div className="res-header">
                   <h3>
-                    Dr. {item.doctor?.username || "Unnamed"}
+                     {item.doctor?.username || "Unnamed"}
                   </h3>
                   <span className={`status-badge ${item.status?.toLowerCase()}`}>
                     {item.status}
