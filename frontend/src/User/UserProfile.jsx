@@ -6,7 +6,10 @@ import "./UserProfile.css";
 const UserProfile = () => {
   const { userInfo, setUserInfo, loading } = useContext(UserContext);
   const [formData, setFormData] = useState({
-    username: "", email: "", phone: "", image: ""
+    username: "",
+    email: "",
+    phone: "",
+    image: ""
   });
   const [preview, setPreview] = useState("");
   const [reservations, setReservations] = useState([]);
@@ -27,10 +30,13 @@ const UserProfile = () => {
   useEffect(() => {
     const fetchReservations = async () => {
       try {
-        const res = await axios.get("http://localhost:5000/booking/my", { withCredentials: true });
+        const res = await axios.get(
+          "http://localhost:5000/booking/my",
+          { withCredentials: true }
+        );
         setReservations(res.data);
       } catch (err) {
-        console.error("Gabim gjatë ngarkimit:", err);
+        console.error("Error while loading reservations:", err);
       } finally {
         setLoadingRes(false);
       }
@@ -39,19 +45,20 @@ const UserProfile = () => {
   }, []);
 
   const handleDeleteBooking = async (bookingId) => {
-    if (window.confirm("A jeni të sigurt që dëshironi të anuloni këtë rezervim?")) {
+    if (window.confirm("Are you sure you want to cancel this reservation?")) {
       try {
-        // Thirrja e rrugës DELETE në Backend
-        await axios.delete(`http://localhost:5000/booking/cancel/${bookingId}`, {
-          withCredentials: true
-        });
+        await axios.delete(
+          `http://localhost:5000/booking/cancel/${bookingId}`,
+          { withCredentials: true }
+        );
 
-        // Përditësimi i listës në ekran (UI)
-        setReservations(prev => prev.filter(item => item._id !== bookingId));
-        alert("Rezervimi u anulua!");
+        setReservations(prev =>
+          prev.filter(item => item._id !== bookingId)
+        );
+        alert("Reservation cancelled successfully!");
       } catch (err) {
-        console.error("Gabim gjatë fshirjes:", err);
-        alert("Serveri u përgjigj me gabim. Sigurohu që Backend-i është i ndezur.");
+        console.error("Error while deleting reservation:", err);
+        alert("Server error. Make sure the backend is running.");
       }
     }
   };
@@ -76,15 +83,19 @@ const UserProfile = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.put("http://localhost:5000/user", formData, { withCredentials: true });
+      const res = await axios.put(
+        "http://localhost:5000/user",
+        formData,
+        { withCredentials: true }
+      );
       setUserInfo(res.data);
-      alert("Profili u përditësua!");
+      alert("Profile updated successfully!");
     } catch (err) {
-      alert("Gabim gjatë ruajtjes.");
+      alert("Error while saving profile.");
     }
   };
 
-  if (loading) return <div className="loading">Duke u ngarkuar...</div>;
+  if (loading) return <div className="loading">Loading...</div>;
 
   return (
     <div className="user-profile-wrapper">
@@ -95,38 +106,71 @@ const UserProfile = () => {
             <img src={preview || "/default-avatar.png"} alt="Profile" />
             <input type="file" accept="image/*" onChange={handleImageChange} />
           </div>
+
           <label>Username:</label>
-          <input type="text" name="username" value={formData.username} onChange={handleChange} required />
+          <input
+            type="text"
+            name="username"
+            value={formData.username}
+            onChange={handleChange}
+            required
+          />
+
           <label>Email:</label>
-          <input type="email" name="email" value={formData.email} onChange={handleChange} required />
+          <input
+            type="email"
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
+            required
+          />
+
           <label>Phone:</label>
-          <input type="text" name="phone" value={formData.phone} onChange={handleChange} />
-          <button type="submit" className="update-button">Update Profile</button>
+          <input
+            type="text"
+            name="phone"
+            value={formData.phone}
+            onChange={handleChange}
+          />
+
+          <button type="submit" className="update-button">
+            Update Profile
+          </button>
         </form>
       </div>
 
       <div className="reservations-column">
         <h2>My Reservations</h2>
+
         {loadingRes ? (
-          <p className="loading-msg">Duke ngarkuar rezervimet...</p>
+          <p className="loading-msg">Loading reservations...</p>
         ) : reservations.length === 0 ? (
-          <div className="reservations-placeholder">Nuk u gjet asnjë rezervim.</div>
+          <div className="reservations-placeholder">
+            No reservations found.
+          </div>
         ) : (
           <div className="reservations-list">
             {reservations.map((item) => (
               <div key={item._id} className="reservation-card">
                 <div className="res-header">
-                  <h3>Dr. {item.doctor?.username || "I paemërtuar"}</h3>
+                  <h3>
+                    Dr. {item.doctor?.username || "Unnamed"}
+                  </h3>
                   <span className={`status-badge ${item.status?.toLowerCase()}`}>
                     {item.status}
                   </span>
                 </div>
+
                 <div className="res-details">
-                  <p><strong>Data:</strong> {item.preferredDate}</p>
-                  <p><strong>Ora:</strong> {item.preferredTime}</p>
-                  <p><strong>Pacienti:</strong> {item.fullName}</p>
-                  <button className="delete-res-btn" onClick={() => handleDeleteBooking(item._id)}>
-                    Anulo Rezervimin
+                  <p><strong>Date:</strong> {item.preferredDate}</p>
+                  <p><strong>Time:</strong> {item.preferredTime}</p>
+                  <p><strong>Patient:</strong> {item.fullName}</p>
+
+                  <button
+                    className="delete-res-btn"
+                    onClick={() => handleDeleteBooking(item._id)}
+                  >
+                    Cancel Reservation
                   </button>
                 </div>
               </div>

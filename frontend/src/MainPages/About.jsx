@@ -44,7 +44,7 @@ const About = () => {
       icon: <FaUsers />,
       title: "Occupational Therapy",
       desc: "Helping patients regain daily living skills through therapy.",
-    }, // Added missing comma here
+    },
     {
       id: "physicalTherapy",
       icon: <FaWheelchair />,
@@ -55,7 +55,6 @@ const About = () => {
 
   return (
     <div className="about-page-wrapper" style={{ overflowX: 'hidden' }}>
-      {/* Hero Section */}
       <div
         className="about-top d-flex flex-column justify-content-center align-items-center text-center"
         style={{
@@ -77,7 +76,7 @@ const About = () => {
         </p>
       </div>
 
-      {/* Departments Grid */}
+
       <Container className="my-5">
         <Row className="g-4">
           {department.map((item) => (
@@ -107,12 +106,11 @@ const About = () => {
       </Container>
       <div className="about-footer-container">
   <div className="about-footer-content">
-    {/* Pjesa e Imazhit */}
+
     <div className="footer-image-side">
       <img src={about1} alt="Medical Professional" className="nurse-img" />
     </div>
 
-    {/* Pjesa e Tekstit */}
     <div className="footer-text-side">
       <h2 className="footer-title">
         Don't Let Your Health <br /> <span>Take a Backseat!</span>
@@ -123,14 +121,6 @@ const About = () => {
       </p>
     </div>
   </div>
-  
-  {/* Logoja në qendër poshtë (si në foto) */}
-  {/* <div className="footer-logo-badge">
-    <div className="logo-shield">
-       <FaHeart className="shield-icon" /> 
-       <span>ProHealth</span>
-    </div>
-  </div> */}
 </div>
     </div>
   );

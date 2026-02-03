@@ -8,7 +8,6 @@ export function UserContextProvider({ children }) {
   const [ready, setReady] = useState(false);
 
   useEffect(() => {
-    // Kur hapet faqja, kontrollojmë nëse kemi cookie të vlefshme
     if (!userInfo) {
       axios.get("http://localhost:5000/user/profile", { withCredentials: true })
         .then(({ data }) => {

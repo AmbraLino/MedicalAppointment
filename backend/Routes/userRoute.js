@@ -27,11 +27,11 @@ router.post("/register", async (req, res) => {
   const { username, email, password, role } = req.body;
   try {
     if (!username || !email || !password)
-      return res.status(400).json({ message: "Plotesoni te gjitha fushat" });
+      return res.status(400).json({ message: "complete all the fields" });
 
     const foundUser = await User.findOne({ email });
     if (foundUser)
-      return res.status(400).json({ message: "Perdoruesi me kete email ekziston" });
+      return res.status(400).json({ message: "User with this email already exists!" });
 
     const hashedPassword = bcrypt.hashSync(password, 10);
     const newUser = new User({
@@ -42,29 +42,27 @@ router.post("/register", async (req, res) => {
     });
 
     await newUser.save();
-    res.status(201).json({ message: "Perdoruesi u krijua" });
+    res.status(201).json({ message: "User created successfully!" });
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
   const user = await User.findOne({ email });
 if (!user) {
-    console.log("Përdoruesi nuk u gjet në DB"); // Kjo do dalë në terminalin e VS Code
-    return res.status(401).json({ message: "Ky email nuk ekziston!" });
+    console.log("user not found");
+    return res.status(401).json({ message: "email doesn't exist!" });
 }
 
 const isMatch = await bcrypt.compare(password, user.password);
 if (!isMatch) {
-    console.log("Fjalëkalimi nuk përputhet"); // Kjo do dalë në terminalin e VS Code
-    return res.status(401).json({ message: "Fjalëkalimi është i gabuar!" });
+    console.log("password doesn't match");
+    return res.status(401).json({ message: "Password is incorrect!" });
 }
 });
 
-// --- LOGIN (I përmirësuar për të kontrolluar të dyja tabelat) ---
 router.post("/login", async (req, res) => {
   const { email, password } = req.body;
 
   try {
-    // Kërkojmë te User ose Doctor (varet si i ke ndarë)
     let user = await User.findOne({ email });
     if (!user) {
       user = await Doctor.findOne({ email });
@@ -79,7 +77,6 @@ router.post("/login", async (req, res) => {
       return res.status(401).json({ message: "Email ose fjalëkalim i gabuar" });
     }
 
-    // PËRDOR 'secret' këtu, jo process.env.JWT_SECRET
     const token = jwt.sign(
       { id: user._id, role: user.role }, 
       secret, 
@@ -88,7 +85,7 @@ router.post("/login", async (req, res) => {
 
     res.cookie('token', token, { 
       httpOnly: true,
-      secure: false, // vendose true nese je ne produksion me HTTPS
+      secure: false,
       sameSite: 'lax' 
     }).json(user);
 
@@ -98,12 +95,10 @@ router.post("/login", async (req, res) => {
   }
 });
 
-// --- GET CURRENT USER (PROFILE) ---
 router.get("/profile", async (req, res) => {
   const token = req.cookies?.token;
   if (!token) return res.status(401).json({ message: "No token provided" });
 
-  // Verifikimi me të njëjtin 'secret'
   jwt.verify(token, secret, {}, async (err, decoded) => {
     if (err) return res.status(403).json({ message: "Invalid token" });
     
@@ -126,7 +121,7 @@ router.post("/logout", (req, res) => {
     httpOnly: true,
     secure: false, 
     sameSite: 'lax',
-    path: "/" // Shto këtë për t'u siguruar që fshihet në të gjithë domain-in
+    path: "/" 
   }).json({ message: "Logged out successfully" });
 });
 
@@ -138,16 +133,16 @@ router.put("/", verifyToken, async (req, res) => {
     const updatedUser = await User.findByIdAndUpdate(
       userId,
       { username, email, phone, image },
-      { new: true } // Kjo kthen dokumentin e përditësuar
+      { new: true }
     ).select("-password");
 
     if (!updatedUser) {
-      return res.status(404).json({ message: "Përdoruesi nuk u gjet" });
+      return res.status(404).json({ message: "User not found" });
     }
 
     res.status(200).json(updatedUser);
   } catch (err) {
-    res.status(500).json({ message: "Gabim gjatë përditësimit", error: err.message });
+    res.status(500).json({ message: "Error updating user", error: err.message });
   }
 });
 

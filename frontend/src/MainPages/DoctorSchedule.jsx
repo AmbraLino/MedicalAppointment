@@ -10,11 +10,11 @@ const DoctorSchedule = () => {
 
   useEffect(() => {
     axios.get(`http://localhost:5000/booking/doctor-schedule/${id}`)
-      .then(res => {console.log("Të dhënat u morën me sukses:", res.data);
+      .then(res => {console.log("Data received:", res.data);
         setAppointments(res.data);
       })
       .catch(err => 
-        console.log("Gabim gjatë marrjes së takimeve:", err));
+        console.log("Error fetching appointments:", err));
   }, [id]);
 
   const days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"];
@@ -26,7 +26,7 @@ const DoctorSchedule = () => {
 
   return (
     <div className="calendar-container shadow-sm rounded border">
-      <h2 className="text-center mb-4">Orari i Vizitave</h2>
+      <h2 className="text-center mb-4">Doctor's Appointment Schedule</h2>
       <div className="calendar-grid">
         {days.map(day => (
           <div key={day} className="day-column">
@@ -35,8 +35,6 @@ const DoctorSchedule = () => {
               const app = appointments.find(a => a.preferredDate?.trim() === day.trim() && a.preferredTime === hour.trim());
               const isOccupied = app?.status === 'approved';
               const isPending = app?.status === 'pending';
-              
-              // Përcaktimi i klasës dinamike bazuar te statusi
               let slotClass = "slot-btn free";
               if (isOccupied) slotClass = "slot-btn busy";
               if (isPending) slotClass = "slot-btn pending";
@@ -45,16 +43,14 @@ const DoctorSchedule = () => {
                 <button
                   key={hour}
                   className={slotClass}
-                  // disabled={isOccupied || isPending}
                   onClick={() => (isOccupied || isPending) ? null : handleSlotClick(day, hour)}
       style={{ cursor: (isOccupied || isPending) ? 'not-allowed' : 'pointer' }}
                 >
                   <span className="slot-time">{hour}</span>
                   <span className="slot-label">
-                    {isOccupied ? "I zene" : isPending ? "Ne pritje" : "Lire"}
+                    {isOccupied ? "Occupied" : isPending ? "Pending" : "Free"}
                   </span>
                   
-                  {/* Shfaq emrin e pacientit vetëm nëse është i zënë/pending */}
                   {app?.fullName && (
                     <span className="patient-name-label">{app.fullName}</span>
                   )}

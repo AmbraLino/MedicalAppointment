@@ -32,7 +32,7 @@
 
 .contact-form-container {
   max-width: 1100px;
-  margin: -60px auto 0; /* Ngritja mbi Hero Section */
+  margin: -60px auto 0;
   background: white;
   border-radius: 20px;
   overflow: hidden;
@@ -117,7 +117,7 @@
 }
 
 .select-wrapper select {
-  appearance: none; /* Heq shigjetën default të browser-it */
+  appearance: none; 
   cursor: pointer;
   padding-right: 40px;
 }
@@ -132,7 +132,6 @@
   pointer-events: none;
 }
 
-/* Date & Time Picker Icon Handling */
 .icon-input-wrapper {
   position: relative;
   display: flex;
@@ -226,7 +225,7 @@
   }
 
   .info-section {
-    order: 2; /* Kalon poshtë formës */
+    order: 2; 
   }
 }
 

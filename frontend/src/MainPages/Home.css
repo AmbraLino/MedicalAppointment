@@ -1,7 +1,6 @@
-/* @import url("https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&family=Roboto:wght@300;400;500&display=swap"); */
 
 .home-container {
-  /* background-color: #606c38; */
+
   color: #fefae0;
   font-family: "Roboto", sans-serif;
   overflow-x: hidden;
@@ -16,8 +15,6 @@
   line-height: 1.7;
 }
 .home-top {
-  /* background: linear-gradient(rgba(40, 54, 24, 0.6), rgba(40, 54, 24, 0.6)),
-    url("../Images/home3.jpg") center/cover no-repeat; */
   color: #fefae0;
   height: 60vh;
 }
@@ -124,9 +121,9 @@
 .about-image img {
   width: 100%;               
   max-width: 500px;          
-  height: auto;              
+  height: auto;
   border-radius: 20px;       
-  shadow: 0 10px 30px rgba(0,0,0,0.1); 
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1); 
 }
 
 .dept-subtitle {
@@ -144,15 +141,9 @@
 }
 
 .department-wrapper {
-  /* display: grid; */
-  /* repeat(3, 1fr) do të thotë 3 kolona të barabarta */
-  /* grid-template-columns: repeat(3, 100px);  */
   gap: 12px; 
   display: flex;
   flex-wrap: wrap;
-  /* padding: 10px 0; */
-  /* max-width: 700px;  */
-  /* margin: 0 auto; */
   justify-content: center; 
 }
 
@@ -160,15 +151,12 @@
   background: white;
   border: 1px solid #e8effe; 
   border-radius: 10px;
-  /* padding: 10px 5px;  */
   display: flex;
   flex-direction: column;
   align-items: center; 
   justify-content: center;
-  /* transition: all 0.3s ease; */
   cursor: pointer;
   text-align: center; 
-  /* min-height: auto;  */
   width: 80%;           
   height: 2%;
 }
@@ -176,15 +164,13 @@
 .dept-icon-box {
   font-size: 1.5rem; 
   color: #6b9ff3;
-  /* margin-right: 0;  */
   margin-bottom: 5px; 
   display: flex;
   align-items: center;
-  /* transition: 0.3s; */
 }
 
 .dept-title {
-  font-size: 0.r8em; /* Ule madhësinë e fontit të titullit */
+  font-size: 0.r8em; 
   font-weight: 600;
   color: #1a2c5b;
   margin: 0;
@@ -227,24 +213,22 @@
     border-radius: 12px;
     padding: 40px 30px;
     width: 300px;
-    position: relative; /* Nevojitet për vijën sipër */
-    overflow: hidden;   /* Që vija të mos dalë jashtë rrethimit */
+    position: relative;
+    overflow: hidden;
     box-shadow: 0 4px 15px rgba(0,0,0,0.05);
     transition: all 0.3s ease;
     cursor: pointer;
-    border-top: 5px solid transparent; /* Vija e padukshme në fillim */
+    border-top: 5px solid transparent; 
 }
-
-/* --- EFEKTI HOVER --- */
 
 .value-card:hover {
     transform: translateY(-10px);
     box-shadow: 0 12px 30px rgba(0,0,0,0.1);
-    border-top: 5px solid #4a90e2; /* Vija bëhet blu këtu */
+    border-top: 5px solid #4a90e2;
 }
 
 .value-card:hover h3 {
-    color: #4a90e2; /* Titulli bëhet blu këtu */
+    color: #4a90e2; 
 }
 
 /* -------------------- */
@@ -268,34 +252,28 @@
     line-height: 1.6;
 }
 
-/* Për celular */
 @media (max-width: 768px) {
     .value-card { width: 100%; }
 }
-/* Përshtatja për celular */
 @media (max-width: 768px) {
     .value-card {
         width: 100%;
     }
 }
-
-/* Përshtatja për celular */
 @media (max-width: 992px) {
   .department-wrapper {
-    grid-template-columns: repeat(2, 1fr); /* 2 kolona për tablet */
+    grid-template-columns: repeat(2, 1fr); 
   }
 }
 
 @media (max-width: 600px) {
   .department-wrapper {
-    grid-template-columns: 1fr; /* 1 kolonë për celular */
+    grid-template-columns: 1fr;
   }
 }
-
-/* RESPONSIVE: Ne celular, vendosi njera nen tjetren */
 @media (max-width: 768px) {
   .about-wrapper {
-    flex-direction: column;  /* Teksti lart, fotoja poshte */
+    flex-direction: column;
     text-align: center;
     padding: 40px 5%;
   }

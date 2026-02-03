@@ -1,6 +1,6 @@
-/* Konteksti kryesor i faqes */
+
 .confirm-booking-page {
-    background-color: #f0f4f8; /* Ngjyrë e lehtë që nuk vret syrin */
+    background-color: #f0f4f8; 
     min-height: 100vh;
     display: flex;
     align-items: center;
@@ -9,7 +9,6 @@
     font-family: 'Inter', sans-serif;
 }
 
-/* Karta e rezervimit */
 .booking-card {
     background: #ffffff;
     border-radius: 20px;
@@ -28,7 +27,7 @@
     letter-spacing: -0.5px;
 }
 
-/* Kutia e përzgjedhjes së orarit (Info nga kalendari) */
+
 .selected-slot-info {
     background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
     border: 1px solid #bfdbfe;
@@ -70,8 +69,6 @@
     box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
     outline: none;
 }
-
-/* Butoni i Konfirmimit */
 .btn-primary {
     background: #2563eb !important;
     border: none !important;
@@ -89,7 +86,6 @@
     box-shadow: 0 10px 15px rgba(37, 99, 235, 0.2);
 }
 
-/* Teksti ndihmës poshtë */
 .booking-footer-note {
     font-size: 0.85rem;
     color: #94a3b8;
@@ -97,7 +93,6 @@
     margin-top: 20px;
 }
 
-/* Animacion i lehtë kur hapet faqja */
 @keyframes fadeIn {
     from { opacity: 0; transform: translateY(10px); }
     to { opacity: 1; transform: translateY(0); }
@@ -106,17 +101,16 @@
 .booking-card {
     animation: fadeIn 0.5s ease-out;
 }
-/* Përditësimi për butonin kryesor */
+
 .btn-primary {
     background: #2563eb !important;
     border: none !important;
     border-radius: 10px !important;
     font-weight: 700 !important;
-    margin-top: 20px; /* Shtuar hapësirë më shumë sipër */
+    margin-top: 20px; 
     transition: all 0.3s ease !important;
 }
 
-/* Stili për butonin Back */
 .btn-outline-secondary {
     border: 2px solid #e2e8f0 !important;
     color: #64748b !important;

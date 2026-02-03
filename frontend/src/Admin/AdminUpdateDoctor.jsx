@@ -13,7 +13,7 @@ const AdminUpdateDoctor = () => {
     password: "",
     department: "",
     specialty: "",
-    bio: ""
+    // bio: ""
   });
   const [image, setImage] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -22,9 +22,8 @@ const AdminUpdateDoctor = () => {
 
   useEffect(() => {
     const fetchDoctor = async () => {
-      // Mbrojtje: nese ID vjen si string ":id" mos bej kerkese
       if (!id || id.startsWith(":")) {
-        setError("ID invalide. Ju lutem kthehuni te lista.");
+        setError("ID invalid");
         setLoading(false);
         return;
       }
@@ -37,11 +36,11 @@ const AdminUpdateDoctor = () => {
           password: "", 
           department: res.data.department || "",
           specialty: res.data.specialty || "",
-          bio: res.data.bio || ""
+          // bio: res.data.bio || ""
         });
         setLoading(false);
       } catch (err) {
-        setError("Gabim: Nuk u gjet ky doktor në sistem.");
+        setError("Could not load doctor data: " + err.message);
         setLoading(false);
       }
     };
@@ -70,7 +69,7 @@ const AdminUpdateDoctor = () => {
       setSuccess(true);
       setTimeout(() => navigate("/admin/doctors"), 2000);
     } catch (err) {
-      setError(err.response?.data?.message || "Gabim gjatë përditësimit.");
+      setError(err.response?.data?.message || "Error during update.");
     }
   };
 
@@ -80,17 +79,17 @@ const AdminUpdateDoctor = () => {
     <Container className="mt-4">
       <Card className="shadow-sm border-0">
         <Card.Header className="bg-primary text-white py-3">
-          <h5 className="mb-0">Përditëso Profilin: {formData.username}</h5>
+          <h5 className="mb-0">Update profile: {formData.username}</h5>
         </Card.Header>
         <Card.Body className="p-4">
           {error && <Alert variant="danger">{error}</Alert>}
-          {success && <Alert variant="success">Të dhënat u ruajtën!</Alert>}
+          {success && <Alert variant="success">Data saved!</Alert>}
 
           <Form onSubmit={handleUpdate}>
             <Row>
               <Col md={6}>
                 <Form.Group className="mb-3">
-                  <Form.Label className="fw-bold">Emri</Form.Label>
+                  <Form.Label className="fw-bold">Name</Form.Label>
                   <Form.Control
                     type="text"
                     value={formData.username}
@@ -110,7 +109,7 @@ const AdminUpdateDoctor = () => {
               </Col>
               <Col md={6}>
                 <Form.Group className="mb-3">
-                  <Form.Label className="fw-bold">Departamenti</Form.Label>
+                  <Form.Label className="fw-bold">Department</Form.Label>
                   <Form.Control
                     type="text"
                     value={formData.department}
@@ -118,14 +117,14 @@ const AdminUpdateDoctor = () => {
                   />
                 </Form.Group>
                 <Form.Group className="mb-3">
-                  <Form.Label className="fw-bold">Foto e Re (Opsionale)</Form.Label>
+                  <Form.Label className="fw-bold">New photo</Form.Label>
                   <Form.Control type="file" onChange={(e) => setImage(e.target.files[0])} />
                 </Form.Group>
               </Col>
             </Row>
             <div className="d-flex gap-2 justify-content-end">
-              <Button variant="secondary" onClick={() => navigate("/admin/doctors")}>Anulo</Button>
-              <Button variant="primary" type="submit">Ruaj Ndryshimet</Button>
+              <Button variant="secondary" onClick={() => navigate("/admin/doctors")}>Cancel</Button>
+              <Button variant="primary" type="submit">Save the changes</Button>
             </div>
           </Form>
         </Card.Body>

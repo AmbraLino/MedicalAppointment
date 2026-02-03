@@ -71,7 +71,6 @@ const FindDoctor = () => {
                 <div className="doctor-img-container">
                   <Card.Img
                     variant="top"
-                    /* THIRRJA E FOTOS NGA BACKEND */
                     src={doc.image ? `http://localhost:5000/Images/${doc.image}` : background_Doctor}
                     className="doctor-image"
                     onError={(e) => { e.target.src = background_Doctor; }}

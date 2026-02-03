@@ -12,7 +12,6 @@ const AdminDoctorPanel = () => {
   useEffect(() => {
     const fetchDoctors = async () => {
       try {
-        // Kontrollo nese URL-ja eshte e saktë me backend-in tend
         const res = await axios.get("http://localhost:5000/admin/doctors", { withCredentials: true });
         setDoctors(res.data);
       } catch (err) {
@@ -23,7 +22,7 @@ const AdminDoctorPanel = () => {
   }, []);
 
   const handleDelete = async (id) => {
-    if (!window.confirm("A jeni i sigurt që doni ta fshini këtë doktor?")) return;
+    if (!window.confirm("Are you sure you want to delete this doctor?")) return;
     try {
       await axios.delete(`http://localhost:5000/api/doctors/${id}`, { withCredentials: true });
       setDoctors(doctors.filter((doc) => doc._id !== id));
@@ -49,7 +48,6 @@ const AdminDoctorPanel = () => {
         </Link>
         <Form.Control
           type="text"
-          placeholder="Search by name, specialty..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           style={{ maxWidth: "500px" }}

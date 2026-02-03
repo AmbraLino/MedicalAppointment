@@ -27,8 +27,8 @@ const orderSchema = new mongoose.Schema(
     },
     status: {
       type: String,
-      enum: ["Në pritje", "Pranuar", "Refuzuar", "Përfunduar"],
-      default: "Në pritje",
+      enum: ["Waiting", "Approved", "Rejected", "Completed"],
+      default: "Waiting",
     },
     message: {
       type: String,

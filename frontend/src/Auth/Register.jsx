@@ -14,9 +14,9 @@ const Register = () => {
   };
 
   const handleSubmit = async () => {
-    if (!newUser.username) return setError("Emri nuk duhet te jete bosh");
-    if (!newUser.email) return setError("Email nuk duhet te jete bosh");
-    if (newUser.password.length < 6) return setError("Fjalekalimi duhet te kete te pakten 6 karaktere!");
+    if (!newUser.username) return setError("username should not be empty");
+    if (!newUser.email) return setError("Email should not be empty");
+    if (newUser.password.length < 6) return setError("Password must be at least 6 characters long!");
 
     try {
       const res = await axios.post('http://localhost:5000/user/register/', newUser);
@@ -34,35 +34,28 @@ const Register = () => {
         <div className="logo-header">
         </div>
 
-        <h2>Regjistrohu</h2>
-        <p className="form-subtext">Ju lutem plotësoni të dhënat tuaja për të krijuar një llogari.</p>
+        <h2>Register</h2>
+        <p className="form-subtext">Please fill in your details to create an account.</p>
 
-        <label>Emri përdoruesit *</label>
-        <input type="text" name="username" value={newUser.username} onChange={handleChange} placeholder="Shkruani emrin e përdoruesit" />
-
+        <label>Username *</label>
+        <input type="text" name="username" value={newUser.username} onChange={handleChange} placeholder="Enter your username" />
         <label>Email *</label>
-        <input type="text" name="email" value={newUser.email} onChange={handleChange} placeholder="Shkruani adresën e email-it" />
+        <input type="text" name="email" value={newUser.email} onChange={handleChange} placeholder="Enter your email address" />
 
-        <label>Fjalëkalimi *</label>
-        <input type="password" name="password" value={newUser.password} onChange={handleChange} placeholder="Shkruani fjalëkalimin" />
+        <label>Password *</label>
+        <input type="password" name="password" value={newUser.password} onChange={handleChange} placeholder="Enter your password" />
 
         {error && <p className="error">{error}</p>}
 
-        <button className="submit-btn" onClick={handleSubmit}>Regjistrohu</button>
+        <button className="submit-btn" onClick={handleSubmit}>Register</button>
 
         <p className="login-link">
-          Keni tashmë një llogari? <a href="/login">Hyr</a>
+          Already have an account? <a href="/login">Log in</a>
         </p>
       </div>
 
       <div className="register-carousel">
-        {/* <Carousel fade indicators={false}>
-          {[home1, home22, vilaPushimi1].map((photo, index) => (
-            <Carousel.Item key={index}>
-              <img src={photo} className="d-block w-100" alt={`Slide ${index + 1}`} />
-            </Carousel.Item>
-          ))}
-        </Carousel> */}
+
       </div>
     </div>
     </div>

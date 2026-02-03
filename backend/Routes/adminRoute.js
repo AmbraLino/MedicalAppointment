@@ -7,7 +7,6 @@ const fs = require("fs");
 const { verifyToken, isAdmin } = require("../middleware/auth");
 const Doctor = require("../Models/doctorModel");
 
-// Krijon folderin Images nëse nuk ekziston
 const dir = './Images';
 if (!fs.existsSync(dir)){
     fs.mkdirSync(dir);
@@ -19,16 +18,14 @@ const storage = multer.diskStorage({
 });
 const upload = multer({ storage: storage });
 
-// --- ROUTES ---
-
-// 1. KRIJO DOKTOR (POST)
+// post method to create doctor nga admini
 router.post("/create", verifyToken, isAdmin, upload.single("image"), async (req, res) => {
     try {
         const { username, email, password, department, specialty, bio } = req.body;
 
         const existingDoc = await Doctor.findOne({ email });
         if (existingDoc) {
-            return res.status(400).json({ message: "Ky email është i regjistruar një herë!" });
+            return res.status(400).json({ message: "this email is already registered!" });
         }
 
         const hashedPassword = bcrypt.hashSync(password, 10);
@@ -44,13 +41,13 @@ router.post("/create", verifyToken, isAdmin, upload.single("image"), async (req,
         });
 
         await newDoctor.save();
-        res.status(201).json({ message: "Doktori u krijua me sukses!" });
+        res.status(201).json({ message: "Doctor created successfully!" });
     } catch (err) {
-        res.status(500).json({ message: "Gabim në server: " + err.message });
+        res.status(500).json({ message: "Error on server: " + err.message });
     }
 });
 
-// 2. MERR TË GJITHË DOKTORËT (GET)
+//metoda get for all doctors
 router.get("/doctors", verifyToken, isAdmin, async (req, res) => {
     try {
         const doctors = await Doctor.find();
@@ -60,45 +57,40 @@ router.get("/doctors", verifyToken, isAdmin, async (req, res) => {
     }
 });
 
-// 3. MERR NJË DOKTOR SPECIFIK (GET)
+//metoda get per me marr 1 doktor vetem
 router.get("/doctors/:id", verifyToken, isAdmin, async (req, res) => {
     try {
         const doctor = await Doctor.findById(req.params.id);
-        if (!doctor) return res.status(404).json({ message: "Doktori nuk u gjet!" });
+        if (!doctor) return res.status(404).json({ message: "Doctor not found!" });
         res.json(doctor);
     } catch (err) {
         res.status(500).json({ message: err.message });
     }
 });
-//delete doctor
 router.delete("/doctors/:id", verifyToken, isAdmin, async (req, res) => {
   try {
-    // Kujdes: Përdor modelin 'Doctor' (jo User) nëse po fshin doktorë
     const deletedDoctor = await Doctor.findByIdAndDelete(req.params.id);
     
     if (!deletedDoctor) {
-      return res.status(404).json({ message: "Doktori nuk u gjet" });
+      return res.status(404).json({ message: "Doctor not found!" });
     }
     
-    res.json({ message: "Doktori u fshi me sukses" });
+    res.json({ message: "Doctor deleted successfully!" });
   } catch (err) {
-    res.status(500).json({ message: "Gabim gjatë fshirjes: " + err.message });
+    res.status(500).json({ message: "Error during deletion: " + err.message });
   }
 });
-// 4. PËRDITËSO DOKTORIN (PUT)
+
+//update doctor me metoden put
 router.put("/update/:id", verifyToken, isAdmin, upload.single("image"), async (req, res) => {
     try {
         const { username, email, password, department, specialty, bio } = req.body;
         
         let updateFields = { username, email, department, specialty, bio };
-
-        // Hash password-in vetëm nëse është dërguar një i ri (jo bosh)
         if (password && password.trim() !== "") {
             const salt = await bcrypt.genSalt(10);
             updateFields.password = await bcrypt.hash(password, salt);
         }
-
-        // Nëse admini ka ngarkuar foto të re
         if (req.file) {
             updateFields.image = req.file.filename;
         }
@@ -106,15 +98,14 @@ router.put("/update/:id", verifyToken, isAdmin, upload.single("image"), async (r
         const updatedDoctor = await Doctor.findByIdAndUpdate(
             req.params.id,
             { $set: updateFields },
-            { new: true } // Kthen doktorin e përditësuar
+            { new: true }
         );
+        if (!updatedDoctor) return res.status(404).json({ message: "Doctor not found!" });
 
-        if (!updatedDoctor) return res.status(404).json({ message: "Doktori nuk u gjet!" });
-
-        res.status(200).json({ message: "U përditësua me sukses!", doctor: updatedDoctor });
+        res.status(200).json({ message: "Doctor updated successfully!", doctor: updatedDoctor });
     } catch (err) {
         console.error("Update Error:", err);
-        res.status(500).json({ message: "Gabim gjatë përditësimit: " + err.message });
+        res.status(500).json({ message: "Error during update: " + err.message });
     }
 });
 

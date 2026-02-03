@@ -7,9 +7,9 @@ const contactSchema = new mongoose.Schema({
   reasonForVisit: String,
   department: String,
   doctorId: String, 
-  preferredDate: { type: String, required: true }, // Monday, Tuesday...
-  preferredTime: { type: String, required: true }, // 09:00, 10:00...
-  status: { type: String, default: 'pending' }     // pending, approved, rejected
+  preferredDate: { type: String, required: true }, 
+  preferredTime: { type: String, required: true }, 
+  status: { type: String, default: 'pending' }  
 });
 
 module.exports = mongoose.model('Contact', contactSchema);

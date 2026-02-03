@@ -6,28 +6,23 @@ import { UserContext } from "../Auth/UserContext";
 const DoctorDashboard = () => {
   const [appointments, setAppointments] = useState([]);
   const { userInfo } = useContext(UserContext);
-
-  // 1. Definojmë funksionin për të marrë të dhënat jashtë useEffect që ta përdorim kudo
-  // Përdorim useCallback që të mos krijohet si funksion i ri në çdo render
- const fetchAppointments = useCallback(async () => {
+  const fetchAppointments = useCallback(async () => {
   try {
     const response = await axios.get("http://localhost:5000/booking/doctor-list", {
       withCredentials: true 
     });
     setAppointments(response.data);
   } catch (err) {
-    console.error("GABIMI I REZERVIMEVE:", err.response?.status); // Nëse del 401, fajin e ka Logini
+    console.error("GABIMI I REZERVIMEVE:", err.response?.status);
   }
 }, []);
 
-  // 2. Thirrja e parë kur ngarkohet komponenti ose kur userInfo ndryshon
   useEffect(() => {
     if (userInfo && userInfo._id) {
       fetchAppointments();
     }
   }, [userInfo, fetchAppointments]);
 
-  // 3. Funksioni për përditësimin e statusit
   const handleStatusUpdate = async (id, newStatus) => {
     try {
       await axios.patch(
@@ -36,29 +31,29 @@ const DoctorDashboard = () => {
         { withCredentials: true }
       );
 
-      alert(`Takimi u ${newStatus === 'approved' ? 'aprovua' : 'refuzua'}!`);
-      fetchAppointments(); // Tani ky funksion është i aksesueshëm këtu
+      alert(`Meeting is ${newStatus === 'approved' ? 'approved' : 'rejected'}!`);
+      fetchAppointments();
     } catch (error) {
-      console.error("Gabim gjatë përditësimit:", error.response?.data || error.message);
-      alert(error.response?.data?.message || "Nuk keni autorizim për këtë veprim.");
+      console.error("error while reservation:", error.response?.data || error.message);
+      alert(error.response?.data?.message || "no premission to update this reservation!");
     }
   };
 
   return (
     <Container className="mt-5">
       <div className="d-flex justify-content-between align-items-center mb-4">
-        <h2 className="text-primary">Paneli i Menaxhimit - Dr. {userInfo?.username}</h2>
+        <h2 className="text-primary">Management panel - Dr. {userInfo?.username}</h2>
         <Badge bg="info">ID: {userInfo?._id}</Badge>
       </div>
 
       <Table striped bordered hover responsive className="shadow-sm">
         <thead className="table-dark">
           <tr>
-            <th>Pacienti</th>
-            <th>Telefon</th>
-            <th>Data & Ora</th>
-            <th>Statusi</th>
-            <th>Veprimet</th>
+            <th>Patient</th>
+            <th>Phone number</th>
+            <th>Date and time</th>
+            <th>Status</th>
+            <th>Actions</th>
           </tr>
         </thead>
         <tbody>
@@ -84,24 +79,24 @@ const DoctorDashboard = () => {
                         size="sm" 
                         onClick={() => handleStatusUpdate(app._id, 'approved')}
                       >
-                        Prano
+                        Accept
                       </Button>
                       <Button 
                         variant="danger" 
                         size="sm" 
                         onClick={() => handleStatusUpdate(app._id, 'rejected')}
                       >
-                        Refuzo
+                        Reject
                       </Button>
                     </div>
                   ) : (
-                    <span className="text-muted small">Përfunduar</span>
+                    <span className="text-muted small">Completed</span>
                   )}
                 </td>
               </tr>
             ))
           ) : (
-            <tr><td colSpan="5" className="text-center">Nuk u gjet asnjë rezervim.</td></tr>
+            <tr><td colSpan="5" className="text-center">No appointments found.</td></tr>
           )}
         </tbody>
       </Table>

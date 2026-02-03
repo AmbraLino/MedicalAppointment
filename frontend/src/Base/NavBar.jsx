@@ -45,7 +45,6 @@ function NavBar() {
   return (
     <Navbar expand="lg" style={{ background: "#6386ac" }} variant="dark" className="py-3 shadow-sm sticky-top">
       <Container>
-        {/* Logoja të dërgon në Dashboard nëse je doktor, në Home nëse je pacient */}
         <Navbar.Brand as={Link} to={isDoctor ? "/doctorDashboard" : "/"}>
           <img src={logo} alt="ProHealth Logo" width="100px" style={{ borderRadius: "5px" }} />
         </Navbar.Brand>
@@ -55,7 +54,6 @@ function NavBar() {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ms-auto align-items-center">
             
-            {/* Elementet që fshihen nëse përdoruesi është doktor */}
             {!isDoctor && (
               <>
                 <Nav.Link as={Link} to="/" className="mx-2" style={{ color: "#FEFAE0" }}>Home</Nav.Link>
@@ -78,7 +76,6 @@ function NavBar() {
               </>
             )}
 
-            {/* Menuja e Autentikimit */}
             {userInfo ? (
               <Dropdown align="end" className="ms-lg-3">
                 <Dropdown.Toggle variant="light" id="dropdown-basic" className="rounded-pill d-flex align-items-center border-0 py-2 shadow-sm">
@@ -87,16 +84,14 @@ function NavBar() {
                 </Dropdown.Toggle>
 
                 <Dropdown.Menu className="shadow border-0 mt-2 p-2">
-                  <Dropdown.Item as={Link} to="/profile" className="rounded">Profili im</Dropdown.Item>
+                  <Dropdown.Item as={Link} to="/profile" className="rounded">Profile</Dropdown.Item>
 
-                  {/* Dashboard shfaqet vetëm këtu brenda për doktorin */}
                   {isDoctor && (
                     <Dropdown.Item as={Link} to="/doctor/doctorDashboard" className="rounded fw-bold text-primary">
                       Dashboard
                     </Dropdown.Item>
                   )}
 
-                  {/* Opsionet për Adminin */}
                   {userInfo.role === "admin" && (
                     <>
                       <Dropdown.Item as={Link} to="/admin/create" className="rounded">Create</Dropdown.Item>
@@ -119,7 +114,7 @@ function NavBar() {
                 className="ms-lg-4 px-4 py-2 rounded-pill shadow-sm text-center"
                 style={{ background: "#40635F", color: "white", fontWeight: "600" }}
               >
-                Hyr
+                Log in
               </Nav.Link>
             )}
           </Nav>

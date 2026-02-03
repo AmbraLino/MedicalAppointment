@@ -18,19 +18,17 @@ const getDoctorById = async (req, res) => {
   }
 };
 
-const bcrypt = require("bcrypt"); // Shtoje këtë në fillim
+const bcrypt = require("bcrypt");
 
 const createDoctor = async (req, res) => {
   try {
     const { username, email, password, specialty, department, description } = req.body;
     const image = req.file ? req.file.filename : "";
-
-    // Hash fjalëkalimin!
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
 
     const newDoctor = new Doctor({
-      username, // Modeli kërkon username, jo name
+      username,
       email,
       password: hashedPassword,
       role: "doctor",
@@ -50,7 +48,7 @@ const updateDoctor = async (req, res) => {
   try {
     const updateData = { ...req.body };
     if (req.file) {
-      updateData.image = req.file.filename; // Nëse po ngarkojmë foto të re
+      updateData.image = req.file.filename;
     }
 
     const updated = await Doctor.findByIdAndUpdate(req.params.id, updateData, { new: true });

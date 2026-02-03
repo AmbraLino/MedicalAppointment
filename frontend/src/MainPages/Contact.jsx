@@ -4,7 +4,6 @@ import './Contact.css';
 import { Container, Row, Col } from "react-bootstrap";
 
 const Contact = () => {
-  // Rregulluar: Emrat e fushave përputhen fiks me Models/contactModel.js
   const [formData, setFormData] = useState({
     fullName: '',
     phoneNumber: '',
@@ -17,7 +16,6 @@ const Contact = () => {
 const handleSubmit = async (e) => {
   e.preventDefault();
   try {
-    // Shto withCredentials këtu poshtë
     const response = await axios.post("http://localhost:5000/contact", formData, {
       withCredentials: true 
     });
@@ -35,9 +33,8 @@ const handleSubmit = async (e) => {
       });
     }
   } catch (error) {
-    // Këtu do të shohësh nëse është 401 apo 500
-    console.error("Gabim gjatë dërgimit:", error.response?.status, error.response?.data);
-    alert("Ndodhi një gabim: " + (error.response?.data?.message || "Kontrolloni autorizimin"));
+    console.error("Error while submitting form:", error.response?.status, error.response?.data);
+    alert("Something wrong happend: " + (error.response?.data?.message || "Control authorization or server."));
   }
 };
 
@@ -81,7 +78,7 @@ const handleSubmit = async (e) => {
                 <div className="input-group">
                   <label>Name</label>
                   <input
-                    name="fullName" // Përputhet me modelin
+                    name="fullName"
                     type="text"
                     value={formData.fullName}
                     onChange={handleChange}
@@ -105,7 +102,7 @@ const handleSubmit = async (e) => {
               <div className="input-group full-width">
                 <label>Medical Record Number</label>
                 <input
-                  name="medicalRecordNumber" // Përputhet me modelin
+                  name="medicalRecordNumber"
                   type="text"
                   value={formData.medicalRecordNumber}
                   onChange={handleChange}
@@ -118,7 +115,7 @@ const handleSubmit = async (e) => {
                   <label>Reason for Visit</label>
                   <div className="select-wrapper">
                     <select 
-                      name="reasonForVisit" // Përputhet me modelin
+                      name="reasonForVisit"
                       value={formData.reasonForVisit} 
                       onChange={handleChange} 
                       required

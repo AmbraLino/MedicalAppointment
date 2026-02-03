@@ -1,15 +1,12 @@
-/* Containeri Kryesor */
 .about-page-wrapper {
   background-color: white;
 }
-
-/* Hero Section (Pjesa lart me foto) */
 .about-top-text {
   font-family: "Outfit", sans-serif;
   text-shadow: 2px 2px 6px rgba(10, 21, 115, 0.8);
-  font-size: 50px; /* E rritur pak për dukshmëri */
+  font-size: 50px; 
   text-align: left;
-  padding-right: 50%; /* Rregulluar që të mos shtypet shumë teksti */
+  padding-right: 50%;
   font-weight: bolder;
   padding-bottom: 2%;
   line-height: 1.2;
@@ -24,7 +21,6 @@
   padding-bottom: 5%;
 }
 
-/* Grid i Departamenteve */
 .department-wrapper {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
@@ -34,7 +30,6 @@
   margin: 0 auto;
 }
 
-/* Kartela e Departamentit */
 .dept-item {
   background: white;
   border: 1px solid #e8effe;
@@ -48,7 +43,7 @@
   cursor: pointer;
   text-align: center;     
   position: relative;
-  min-height: 320px; /* Lartësi e qëndrueshme */
+  min-height: 320px; 
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
 }
 
@@ -58,8 +53,6 @@
   transform: translateY(-8px);
   box-shadow: 0 12px 24px rgba(132, 201, 163, 0.3);
 }
-
-/* Ikona */
 .dept-icon-box {
   font-size: 3rem;        
   color: #6b9ff3;
@@ -69,7 +62,6 @@
   transition: 0.3s;
 }
 
-/* Teksti brenda kartelës */
 .dept-title {
   font-size: 1.4rem;
   font-weight: 700;
@@ -86,23 +78,21 @@
   transition: 0.3s;
 }
 
-/* Butoni me shigjetë (Rregulluar pozicioni) */
 .dept-arrow-btn {
   background-color: #f0f4ff;
   width: 45px;
   height: 45px;
-  border-radius: 50%; /* E bëjmë rreth */
+  border-radius: 50%; 
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 1.2rem;
   color: #3a86ff;
   transition: 0.3s ease;
-  margin-top: auto; /* E shtyn në fund të kartelës */
-  align-self: flex-end; /* E dërgon në anën e djathtë poshtë */
+  margin-top: auto; 
+  align-self: flex-end;
 }
 
-/* Hover Effects për brendësinë e kartelës */
 .dept-item:hover .dept-icon-box,
 .dept-item:hover .dept-title,
 .dept-item:hover .dept-description,
@@ -113,13 +103,12 @@
 .dept-item:hover .dept-arrow-btn {
   background-color: white;
   color: #84c9a3;
-  transform: rotate(-45deg); /* Pak efekt rrotullimi për shigjetën */
+  transform: rotate(-45deg);
 }
 
-/* --- FOOTER BANNER --- */
 .about-footer-container {
   position: relative;
-  background-color: #f8fbff; /* Një sfond shumë i lehtë që të dallohet infermierja */
+  background-color: #f8fbff;
   padding-top: 60px;
   margin-top: 100px;
   overflow: visible;
@@ -151,7 +140,6 @@
   padding-bottom: 100px;
   text-align: left;
 }
-
 .footer-title {
   font-family: "Outfit", sans-serif;
   font-size: 3.2rem;
@@ -162,37 +150,10 @@
 }
 
 .footer-title span {
-  color: #3a86ff; /* Ngjyrë tjetër për theksim */
-}
+  color: #3a86ff; }
 
 .footer-subtitle {
   font-size: 1.2rem;
   color: #555;
   line-height: 1.6;
 }
-
-/* Logo Badge në fund */
-/* .footer-logo-badge {
-  position: absolute;
-  bottom: -30px; 
-  left: 50%;
-  transform: translateX(-50%);
-  background-color: #a3c9f8; 
-  padding: 15px 50px;
-  border-radius: 100px 100px 0 0; 
-  min-width: 250px;
-  text-align: center;
-  box-shadow: 0 -5px 20px rgba(0,0,0,0.1);
-} */
-
-/* .logo-shield {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  color: white;
-}
-
-.shield-icon {
-  font-size: 1.8rem;
-  margin-bottom: 5px;
-} */

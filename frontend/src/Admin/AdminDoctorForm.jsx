@@ -55,47 +55,42 @@ const AdminDoctorForm = () => {
   return (
     <Container className="mt-5" style={{ maxWidth: "600px" }}>
       <div className="p-4 shadow rounded bg-light">
-        <h2 className="mb-4 text-center text-primary">Regjistro Doktor të Ri</h2>
+        <h2 className="mb-4 text-center text-primary">Add a new doctor</h2>
         {error && <Alert variant="danger">{error}</Alert>}
         
         <Form onSubmit={handleSubmit} encType="multipart/form-data">
           <Form.Group className="mb-3">
-            <Form.Label>Emri i Plotë *</Form.Label>
-            <Form.Control type="text" placeholder="Dr. Hohn DOe" onChange={(e) => setUsername(e.target.value)} />
+            <Form.Label>Full name</Form.Label>
+            <Form.Control type="text" onChange={(e) => setUsername(e.target.value)} />
           </Form.Group>
 
           <Form.Group className="mb-3">
-            <Form.Label>Email *</Form.Label>
-            <Form.Control type="email" placeholder="doktori@email.com" onChange={(e) => setEmail(e.target.value)} />
+            <Form.Label>Email</Form.Label>
+            <Form.Control type="email" onChange={(e) => setEmail(e.target.value)} />
           </Form.Group>
 
           <Form.Group className="mb-3">
-            <Form.Label>Fjalëkalimi *</Form.Label>
-            <Form.Control type="password" placeholder="******" onChange={(e) => setPassword(e.target.value)} />
+            <Form.Label>Password</Form.Label>
+            <Form.Control type="password" onChange={(e) => setPassword(e.target.value)} />
           </Form.Group>
 
           <Form.Group className="mb-3">
-            <Form.Label>Departamenti *</Form.Label>
-            <Form.Control type="text" placeholder="Kardiologji" onChange={(e) => setDepartment(e.target.value)} />
+            <Form.Label>Department</Form.Label>
+            <Form.Control type="text" onChange={(e) => setDepartment(e.target.value)} />
           </Form.Group>
 
           <Form.Group className="mb-3">
-            <Form.Label>Specialiteti</Form.Label>
-            <Form.Control type="text" placeholder="Kirurg" onChange={(e) => setSpecialty(e.target.value)} />
+            <Form.Label>Specialty</Form.Label>
+            <Form.Control type="text" onChange={(e) => setSpecialty(e.target.value)} />
           </Form.Group>
 
           <Form.Group className="mb-3">
-            <Form.Label>Bio</Form.Label>
-            <Form.Control as="textarea" rows={3} onChange={(e) => setBio(e.target.value)} />
-          </Form.Group>
-
-          <Form.Group className="mb-3">
-            <Form.Label>Foto e Profitit</Form.Label>
+            <Form.Label>Photo</Form.Label>
             <Form.Control type="file" accept="image/*" onChange={(e) => setImage(e.target.files[0])} />
           </Form.Group>
 
           <Button type="submit" variant="primary" className="w-100" disabled={loading}>
-            {loading ? "Duke u procesuar..." : "Regjistro Doktorin"}
+            {loading ? "Loading..." : "Register Doctor"}
           </Button>
         </Form>
       </div>

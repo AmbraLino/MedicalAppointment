@@ -7,7 +7,7 @@
 
 .calendar-grid {
     display: grid;
-    grid-template-columns: repeat(5, 1fr); /* 5 kolona për 5 ditë */
+    grid-template-columns: repeat(5, 1fr); 
     gap: 15px;
 }
 
@@ -18,7 +18,7 @@
 }
 
 .day-header {
-    background-color: #1e40af; /* Blu e errët */
+    background-color: #1e40af;
     color: #ffffff !important;
     padding: 12px 5px;
     text-align: center;
@@ -60,7 +60,6 @@
     text-overflow: ellipsis;
 }
 
-/* Gjendja: Lirë */
 .slot-btn.free { 
     background-color: #ffffff; 
     color: #334155; 
@@ -72,7 +71,6 @@
     box-shadow: 0 4px 6px rgba(0,0,0,0.05);
 }
 
-/* Gjendja: Zënë (Approved) */
 .slot-btn.busy { 
     background-color: #eff6ff; 
     border-color: #3b82f6; 
@@ -81,7 +79,6 @@
     opacity: 0.8;
 }
 
-/* Gjendja: Në pritje (Pending) */
 .slot-btn.pending { 
     background-color: #fffbeb; 
     border-color: #f59e0b; 

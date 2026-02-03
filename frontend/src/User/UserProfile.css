@@ -10,12 +10,11 @@
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   color: #021e24;
 }
-/* Rregullo klasën ekzistuese */
 .update-button {
   width: 100%;
   padding: 12px;
-  color: #ffffff; /* Bardhë e pastër */
-  background-color: #BC6C25; /* Ngjyrë që përshtatet me paletën tënde (Terrakotë) */
+  color: #ffffff; 
+  background-color: #BC6C25; 
   font-weight: 700;
   border: none;
   border-radius: 8px;
@@ -26,7 +25,7 @@
 }
 
 .update-button:hover {
-  background-color: #DDA15E; /* Ngjyrë më e hapur në hover */
+  background-color: #DDA15E; 
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(0,0,0,0.2);
 }

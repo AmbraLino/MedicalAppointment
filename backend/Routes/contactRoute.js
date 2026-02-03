@@ -5,16 +5,16 @@ const contactModel = require('../Models/contactModel');
 router.post("/", async (req, res) => {
   try {
     if (!req.body || Object.keys(req.body).length === 0) {
-        return res.status(400).json({ error: "Body është bosh!" });
+        return res.status(400).json({ error: "Body is empty!" });
     }
 
     const newAppointment = new contactModel(req.body);
     const saved = await newAppointment.save();
     
-    console.log("U ruajt në MongoDB:", saved); 
-    res.status(201).json({ message: "Termini u dërgua me sukses!", data: saved });
+    console.log("Saved on mongo:", saved); 
+    res.status(201).json({ message: "sent!", data: saved });
   } catch (error) {
-    console.error("GABIMI NË RUAJTJE:", error.message);
+    console.error("error:", error.message);
     res.status(500).json({ error: error.message });
   }
 });

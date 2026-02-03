@@ -17,8 +17,7 @@ const Login = () => {
         setError("");
 
         try {
-            // 1. Login - Serveri dërgon Set-Cookie në Header
-            const { data } = await axios.post(
+                        const { data } = await axios.post(
                 "http://localhost:5000/user/login",
                 { email, password },
                 { withCredentials: true }
@@ -34,7 +33,7 @@ const Login = () => {
                 navigate("/", { replace: true });
             }
         } catch (err) {
-            setError(err.response?.data?.message || "Email ose fjalëkalim i gabuar.");
+            setError(err.response?.data?.message || "Email or password is incorrect.");
         }
     };
 
@@ -45,48 +44,48 @@ const Login = () => {
                     <div className="text-center mb-4">
                         <h2 className="fw-bold text-primary">ProHealth Portal</h2>
                         <p className="login-subtitle">
-                            Mirësevini! Hyni për të menaxhuar vizitat tuaja.
+                            Welcome! Please log in to access your account.
                         </p>
                     </div>
 
                     <form onSubmit={handleLogin}>
-                        <label>Email Adresa</label>
+                        <label>Email</label>
                         <input
                             type="email"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
-                            placeholder="emri@shembull.com"
+                            placeholder="example@example.com"
                             required
                         />
 
-                        <label>Fjalëkalimi</label>
+                        <label>Password</label>
                         <input
                             type="password"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
-                            placeholder="••••••••"
+                            placeholder="******"
                             required
                         />
 
                         <div className="login-options d-flex justify-content-between">
                             <div>
                                 <input type="checkbox" id="remember" /> 
-                                <label htmlFor="remember" className="ms-1 shadow-none">Më mbaj mend</label>
+                                <label htmlFor="remember" className="ms-1 shadow-none">Remember me</label>
                             </div>
                             <a href="/forgot" className="forgot-password">
-                                Harruat fjalëkalimin?
+                                Forgot password?
                             </a>
                         </div>
 
                         {error && <div className="alert alert-danger p-2 mt-2" style={{fontSize: '14px'}}>{error}</div>}
 
-                        <button type="submit" className="login-btn mt-3">Hyr në Llogari</button>
+                        <button type="submit" className="login-btn mt-3">Log in</button>
                     </form>
 
                     <p className="login-signup-text mt-4">
-                        Nuk keni llogari?{" "}
+                        Don't have an account?{" "}
                         <a href="/register" className="login-register fw-bold">
-                            Regjistrohu si Pacient
+                            Register as a Patient
                         </a>
                     </p>
                 </div>
@@ -100,8 +99,7 @@ const Login = () => {
                                 alt="Medical 1"
                             />
                             <Carousel.Caption className="carousel-overlay">
-                                <h3>Kujdes mjekësor 24/7</h3>
-                                <p>Doktorët tanë janë këtu për ju në çdo kohë.</p>
+                                <h3>Medical care 24/7</h3>
                             </Carousel.Caption>
                         </Carousel.Item>
                         <Carousel.Item>
@@ -111,8 +109,8 @@ const Login = () => {
                                 alt="Medical 2"
                             />
                             <Carousel.Caption className="carousel-overlay">
-                                <h3>Teknologjia e fundit</h3>
-                                <p>Rezervoni terminin tuaj online me një klikim.</p>
+                                <h3>Latest Technology</h3>
+                                <p>Advanced medical equipment for better care.</p>
                             </Carousel.Caption>
                         </Carousel.Item>
                     </Carousel>
