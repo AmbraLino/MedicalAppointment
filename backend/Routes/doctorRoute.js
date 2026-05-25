@@ -12,7 +12,6 @@ const { verifyToken, isAdmin } = require("../middleware/auth");
 router.get("/", getDoctors);
 router.get("/:id", getDoctorById);
 
-
 // ADMIN 
 router.post("/", createDoctor);
 router.put("/:id", updateDoctor);

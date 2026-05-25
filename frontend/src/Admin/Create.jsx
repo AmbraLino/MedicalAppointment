@@ -34,7 +34,7 @@ const Create = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!doctor.name || !doctor.specialty || !doctor.department) {
+    if (!doctor.username || !doctor.specialty || !doctor.department || !doctor.description) {
       return alert("Please fill all required fields!");
     }
 
@@ -77,8 +77,15 @@ const Create = () => {
 
           <Form.Group className="mb-3">
             <Form.Label>Description</Form.Label>
-            <Form.Control as="textarea" rows={3} name="description" value={doctor.description} onChange={handleChange} />
-          </Form.Group>
+            <Form.Control
+              as="textarea"
+              rows={2}
+              name="description" 
+              value={doctor.description}
+              onChange={handleChange}
+              placeholder="Enter the short bio or code"
+            />          
+            </Form.Group>
 
           <Form.Group className="mb-3">
             <Form.Label>Photo</Form.Label>

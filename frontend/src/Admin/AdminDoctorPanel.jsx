@@ -35,7 +35,8 @@ const AdminDoctorPanel = () => {
     (doc) =>
       doc.username?.toLowerCase().includes(search.toLowerCase()) ||
       doc.department?.toLowerCase().includes(search.toLowerCase()) ||
-      doc.specialty?.toLowerCase().includes(search.toLowerCase())
+      doc.specialty?.toLowerCase().includes(search.toLowerCase()) ||
+      doc.description?.toLowerCase().includes(search.toLowerCase())
   );
 
   return (
@@ -60,6 +61,7 @@ const AdminDoctorPanel = () => {
             <th>Photo</th>
             <th>Name</th>
             <th>Specialty</th>
+            <th>Description</th>
             <th>Department</th>
             <th>Actions</th>
           </tr>
@@ -78,6 +80,7 @@ const AdminDoctorPanel = () => {
               </td>
               <td>{doc.username}</td>
               <td>{doc.specialty}</td>
+              <td>{doc.description}</td>
               <td>{doc.department}</td>
               <td>
                 <div className="d-flex gap-2">

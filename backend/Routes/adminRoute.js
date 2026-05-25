@@ -21,7 +21,7 @@ const upload = multer({ storage: storage });
 // post method to create doctor nga admini
 router.post("/create", verifyToken, isAdmin, upload.single("image"), async (req, res) => {
     try {
-        const { username, email, password, department, specialty, bio } = req.body;
+        const { username, email, password, department, specialty, description } = req.body;
 
         const existingDoc = await Doctor.findOne({ email });
         if (existingDoc) {
@@ -36,7 +36,7 @@ router.post("/create", verifyToken, isAdmin, upload.single("image"), async (req,
             password: hashedPassword,
             department,
             specialty,
-            bio,
+            description,
             image: req.file ? req.file.filename : ""
         });
 
@@ -84,9 +84,9 @@ router.delete("/doctors/:id", verifyToken, isAdmin, async (req, res) => {
 //update doctor me metoden put
 router.put("/update/:id", verifyToken, isAdmin, upload.single("image"), async (req, res) => {
     try {
-        const { username, email, password, department, specialty, bio } = req.body;
+        const { username, email, password, department, specialty, description } = req.body;
         
-        let updateFields = { username, email, department, specialty, bio };
+        let updateFields = { username, email, department, specialty, description };
         if (password && password.trim() !== "") {
             const salt = await bcrypt.genSalt(10);
             updateFields.password = await bcrypt.hash(password, salt);

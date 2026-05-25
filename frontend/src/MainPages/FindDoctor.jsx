@@ -32,8 +32,8 @@ const FindDoctor = () => {
     if (filter !== "All" && doc.department !== filter) return false;
     if (searchQuery !== "") {
       return doc.username.toLowerCase().includes(searchQuery) ||
-      doc.department.toLowerCase().includes(searchQuery) ||
-      doc.specialty?.toLowerCase().includes(searchQuery);
+        doc.department.toLowerCase().includes(searchQuery) ||
+        doc.specialty?.toLowerCase().includes(searchQuery);
     }
     return true;
   });
@@ -79,8 +79,10 @@ const FindDoctor = () => {
                 </div>
                 <Card.Body className="text-center d-flex flex-column">
                   <Card.Title className="dr-name">{doc.username}</Card.Title>
-                  <p className="dr-specialty text-primary">{doc.specialty}</p>
-                  <Card.Text className="dr-desc text-muted small">{doc.description}</Card.Text>
+                  <Card.Text className="dr-specialty text-primary">{doc.specialty}</Card.Text>
+                  {doc.description && (
+                    <Card.Text className="text-muted small">{doc.description}</Card.Text>
+                  )}
                   <Button variant="primary" className="mt-auto mb-3 fw-bold" onClick={() => navigate(`/doctor-schedule/${doc._id}`)}>
                     Book Appointment
                   </Button>

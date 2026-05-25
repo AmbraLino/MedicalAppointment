@@ -19,7 +19,8 @@ const userSchema = new mongoose.Schema({
     },
     phone: { type: String },
     profilePic: { type: String },
-    department: { type: String }
+    department: { type: String },
+    description: { type: String }
 
 },
     { timestamps: true })

@@ -123,3 +123,21 @@
     border-color: #cbd5e1 !important;
     color: #475569 !important;
 }
+/* Shto këto rreshta në fund të skedarit tuaj Booking.css */
+
+.react-tel-input .form-control:focus {
+    border-color: #3b82f6 !important;
+    box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1) !important;
+}
+
+.booking-card .form-select:focus {
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
+    outline: none;
+}
+
+.react-tel-input .country-list {
+    z-index: 1050 !important;
+    border-radius: 10px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}

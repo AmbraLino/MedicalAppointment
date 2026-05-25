@@ -9,9 +9,7 @@ const { verifyToken } = require("../middleware/auth");
 const User = require("../Models/userModel");
 const Doctor = require("../Models/doctorModel");
 
-const secret = "asdfe45we45w345wegw345werjktjwertkjfdgfgfsgf";
-
-// Konfigurimi i Multer
+// 1. Konfigurimi i Multer për ruajtjen e fotove të pacientëve
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     cb(null, "Images/");
@@ -22,7 +20,7 @@ const storage = multer.diskStorage({
 });
 const upload = multer({ storage: storage });
 
-// --- REGISTER ---
+// 2. --- REGISTER ---
 router.post("/register", async (req, res) => {
   const { username, email, password, role } = req.body;
   try {
@@ -46,19 +44,9 @@ router.post("/register", async (req, res) => {
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
-  const user = await User.findOne({ email });
-if (!user) {
-    console.log("user not found");
-    return res.status(401).json({ message: "email doesn't exist!" });
-}
-
-const isMatch = await bcrypt.compare(password, user.password);
-if (!isMatch) {
-    console.log("password doesn't match");
-    return res.status(401).json({ message: "Password is incorrect!" });
-}
 });
 
+// 3. --- LOGIN ---
 router.post("/login", async (req, res) => {
   const { email, password } = req.body;
 
@@ -79,7 +67,7 @@ router.post("/login", async (req, res) => {
 
     const token = jwt.sign(
       { id: user._id, role: user.role }, 
-      secret, 
+      process.env.JWT_SECRET, 
       { expiresIn: '1d' }
     );
 
@@ -95,11 +83,12 @@ router.post("/login", async (req, res) => {
   }
 });
 
+// 4. --- GET PROFILE (I saktësuar që të kthejë .image për React) ---
 router.get("/profile", async (req, res) => {
   const token = req.cookies?.token;
   if (!token) return res.status(401).json({ message: "No token provided" });
 
-  jwt.verify(token, secret, {}, async (err, decoded) => {
+  jwt.verify(token, process.env.JWT_SECRET, {}, async (err, decoded) => {
     if (err) return res.status(403).json({ message: "Invalid token" });
     
     try {
@@ -110,12 +99,18 @@ router.get("/profile", async (req, res) => {
       
       if (!user) return res.status(404).json({ message: "User not found" });
       
-      res.status(200).json(user);
+      // Këtu bëjmë konvertimin në objekt që React të lexojë .image
+      const userToReturn = user.toObject();
+      userToReturn.image = user.profilePic || user.image; 
+      
+      res.status(200).json(userToReturn);
     } catch (error) {
       res.status(500).json({ message: "Server error" });
     }
   });
 });
+
+// 5. --- LOGOUT ---
 router.post("/logout", (req, res) => {
   res.clearCookie("token", {
     httpOnly: true,
@@ -125,14 +120,24 @@ router.post("/logout", (req, res) => {
   }).json({ message: "Logged out successfully" });
 });
 
-router.put("/", verifyToken, async (req, res) => {
+// 6. --- UPDATE PROFILE (Ruan në profilePic dhe kthen .image te Frontend) ---
+router.put("/", verifyToken, upload.single("image"), async (req, res) => {
   try {
     const userId = req.user.id || req.user._id;
-    const { username, email, phone, image } = req.body;
+    
+    const updateData = {
+      username: req.body.username,
+      email: req.body.email,
+      phone: req.body.phone
+    };
+
+    if (req.file) {
+      updateData.profilePic = req.file.filename;
+    }
 
     const updatedUser = await User.findByIdAndUpdate(
       userId,
-      { username, email, phone, image },
+      updateData,
       { new: true }
     ).select("-password");
 
@@ -140,7 +145,10 @@ router.put("/", verifyToken, async (req, res) => {
       return res.status(404).json({ message: "User not found" });
     }
 
-    res.status(200).json(updatedUser);
+    const userToReturn = updatedUser.toObject();
+    userToReturn.image = updatedUser.profilePic;
+
+    res.status(200).json(userToReturn);
   } catch (err) {
     res.status(500).json({ message: "Error updating user", error: err.message });
   }

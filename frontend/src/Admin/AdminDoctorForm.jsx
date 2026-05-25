@@ -9,7 +9,8 @@ const AdminDoctorForm = () => {
   const [password, setPassword] = useState("");
   const [department, setDepartment] = useState("");
   const [specialty, setSpecialty] = useState("");
-  const [bio, setBio] = useState("");
+  // const [bio, setBio] = useState("");
+  const [description, setDescription] = useState("");
   const [image, setImage] = useState(null);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
@@ -20,8 +21,8 @@ const AdminDoctorForm = () => {
     setError("");
     setLoading(true);
 
-    if (!username || !email || !password || !department) {
-      setError("Plotësoni të gjitha fushat e detyrueshme!");
+    if (!username || !email || !password || !department || !specialty || !description) {
+      setError("Fill in all required fields!");
       setLoading(false);
       return;
     }
@@ -33,7 +34,8 @@ const AdminDoctorForm = () => {
       formData.append("password", password);
       formData.append("department", department);
       formData.append("specialty", specialty);
-      formData.append("bio", bio);
+      // formData.append("bio", bio);
+      formData.append("description", description);
       formData.append("role", "doctor"); 
       if (image) formData.append("image", image);
 
@@ -82,6 +84,11 @@ const AdminDoctorForm = () => {
           <Form.Group className="mb-3">
             <Form.Label>Specialty</Form.Label>
             <Form.Control type="text" onChange={(e) => setSpecialty(e.target.value)} />
+          </Form.Group>
+
+          <Form.Group className="mb-3">
+            <Form.Label>Description</Form.Label>
+            <Form.Control type="text" onChange={(e) => setDescription(e.target.value)} />
           </Form.Group>
 
           <Form.Group className="mb-3">

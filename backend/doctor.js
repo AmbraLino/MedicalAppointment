@@ -21,7 +21,9 @@ const createDoctors = async () => {
         email: docData.email,
         password: bcrypt.hashSync(docData.password, salt),
         role: "doctor",
-        department: docData.dept // Sigurohemi qe modeli 'User' e ka kete fushe
+        department: docData.dept ,// Sigurohemi qe modeli 'User' e ka kete fushe
+        specialty: docData.specialty, 
+        description: docData.description ,
       });
 
       await newDoctor.save();

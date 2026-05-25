@@ -3,18 +3,36 @@ const mongoose = require("mongoose");
 const bookingSchema = new mongoose.Schema({
   doctor: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "User",
+    ref: "Doctor",
     required: true,
   },
-user: {
+  user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
     required: true,
   },
-  fullName: String,
-  phoneNumber: String,
-  preferredDate: String,
-  preferredTime: String,
+  fullName: { type: String, required: true },
+  phoneNumber: { type: String, required: true }, 
+  preferredDate: { type: String, required: true },
+  preferredTime: { type: String, required: true },
+  
+  appointmentType: {
+    type: String,
+    enum: ["normal", "emergency", "consultation"],
+    required: true,
+    default: "normal"
+  },
+
+  cost: { 
+    type: Number, 
+    default: 0 
+  },
+
+  consultationType: { 
+    type: String, 
+    enum: ['online', 'offline'], 
+    default: 'offline' 
+  },
 
   status: {
     type: String,

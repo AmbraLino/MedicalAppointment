@@ -1,0 +1,526 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+
+/* ==========================================
+   1. RREGULLIMET THEMELORE E STRUKTURËS
+   ========================================== */
+body {
+    margin: 0;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background-color: #f4f7fe;
+    color: #1a202c;
+}
+
+.dashboard-wrapper {
+    display: flex;
+    min-height: 100vh;
+    background-color: #f4f7fe;
+    position: relative;
+    z-index: 1;
+}
+
+/* FIX KRYESOR PËR MAIN CONTENT DHE SHTYRJEN E FOOTER-IT */
+.main-content {
+    margin-left: 260px; /* E shtyn përmbajtjen djathtas që të mos futet nën sidebar */
+    flex-grow: 1;
+    width: calc(100% - 260px);
+    min-height: 100vh;
+    padding-bottom: 80px; /* Krijuar hapësirë në fund që footer-i mos të preki tabelat */
+    background-color: #f4f7fe;
+    box-sizing: border-box;
+}
+
+/* NËSE FOOTER-I VJEN SI KOMPONENT GLOBAL (Fix për zënien e faqes) */
+footer, .footer-container, .site-footer {
+    position: relative;
+    clear: both;
+    margin-left: 260px !important; /* E shtyn footer-in jashtë zonës së sidebar-it */
+    width: calc(100% - 260px) !important;
+    background-color: #ffffff;
+    z-index: 2;
+}
+
+/* ==========================================
+   2. SIDEBAR STILIMI (MAJTAS)
+   ========================================== */
+.sidebar-container {
+    width: 260px;
+    background-color: #ffffff;
+    border-right: 1px solid #eef2f9;
+    padding: 30px 20px;
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    height: 100vh;
+    left: 0;
+    top: 0;
+    z-index: 10;
+    box-sizing: border-box;
+}
+
+.sidebar-logo {
+    margin-bottom: 40px;
+    padding-left: 10px;
+}
+
+.logo-text {
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: #1a202c;
+    letter-spacing: -0.5px;
+}
+
+.logo-blue {
+    color: #4361ee;
+}
+
+.sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex-grow: 1;
+}
+
+/* Butonat e menysë në Sidebar */
+.nav-item-btn {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 12px 15px;
+    color: #a3b1cc;
+    font-weight: 500;
+    font-size: 0.95rem;
+    border: none;
+    background: transparent;
+    width: 100%;
+    text-align: left;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.nav-item-btn:hover, 
+.nav-item-btn.active {
+    color: #4361ee;
+    background-color: #f0f3ff;
+    font-weight: 600;
+    outline: none;
+}
+
+.nav-icon {
+    font-size: 1.2rem;
+}
+
+.sidebar-footer {
+    padding-top: 20px;
+    border-top: 1px solid #f1f5f9;
+}
+
+.nav-item-footer {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #718096;
+    text-decoration: none;
+    font-size: 0.9rem;
+}
+
+/* ==========================================
+   3. TOPBAR / HEADER STILIMI
+   ========================================== */
+.topbar-container {
+    background: transparent;
+    padding: 10px 0;
+}
+
+.action-circle-btn {
+    border: none;
+    background: #ffffff;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #4a5568;
+    font-size: 1.1rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+    position: relative;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.action-circle-btn:hover {
+    background: #f8fafc;
+}
+
+.badge-dot {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: 8px;
+    height: 8px;
+    background-color: #ff4d4d;
+    border-radius: 50%;
+}
+
+/* Rregullimi i saktë i fotos së Doktorit */
+.avatar-main {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    object-fit: cover; /* Parandalon shtrembërimin ose zgjatjen e imazhit dinamik */
+    background-color: #e2e8f0;
+    border: 1px solid #cbd5e1;
+    display: block;
+}
+
+.profile-name {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #1a202c;
+}
+
+.profile-role {
+    font-size: 0.8rem;
+    color: #718096;
+}
+
+/* ==========================================
+   4. STAT CARDS (KARTAT E STATISTIKAVE)
+   ========================================== */
+.stat-card {
+    border-radius: 20px !important;
+    background: #ffffff;
+    padding: 8px;
+}
+
+.stat-title {
+    font-size: 0.82rem;
+    color: #a3b1cc;
+    font-weight: 600;
+    margin-bottom: 12px;
+}
+
+.stat-number {
+    font-size: 1.85rem;
+    font-weight: 700;
+    color: #3b46fc;
+    margin-bottom: 0;
+}
+
+.text-indigo { color: #6f42c1 !important; }
+.text-dark-blue { color: #1e3a8a !important; }
+
+.stat-link {
+    font-size: 0.75rem;
+    color: #cbd5e1;
+    text-decoration: none;
+}
+
+/* ==========================================
+   5. KARTAT E PËRMBAJTJES DHE LISTAT
+   ========================================== */
+.content-card, 
+.schedule-side-card {
+    border-radius: 24px !important;
+    background: #ffffff;
+    border: none;
+}
+
+.section-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #1a202c;
+}
+
+.scrollable-list {
+    max-height: 380px;
+    overflow-y: auto;
+    padding-right: 5px;
+}
+
+.notification-item {
+    background: #fafbfe !important;
+    border-radius: 16px !important;
+    margin-bottom: 12px;
+    padding: 15px !important;
+}
+
+/* Fotot e pacientëve nëpër lista */
+.avatar-sub {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    object-fit: cover;
+    background-color: #e2e8f0;
+}
+
+.item-name { color: #2d3748; }
+
+.time-badge {
+    font-size: 0.8rem;
+    background: #e0e7ff;
+    color: #4361ee;
+    padding: 4px 12px;
+    border-radius: 8px;
+    font-weight: 600;
+}
+
+.btn-action-round {
+    border-radius: 50% !important;
+    width: 32px;
+    height: 32px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 !important;
+}
+
+.patient-row-item {
+    padding: 12px 0;
+}
+
+.btn-check-patient {
+    background: #eff4ff !important;
+    border: none !important;
+    color: #3b46fc !important;
+    font-size: 0.75rem !important;
+    font-weight: 600 !important;
+    padding: 6px 14px !important;
+    border-radius: 10px !important;
+    transition: opacity 0.2s;
+}
+
+.btn-check-patient:hover {
+    opacity: 0.85;
+}
+
+/* ==========================================
+   6. STRUKTURA E FAQES SË PACIENTËVE (Table View)
+   ========================================== */
+.patients-table th {
+    color: #a3b1cc;
+    font-weight: 600;
+    font-size: 0.85rem;
+    border-bottom: 1px solid #eef2f9;
+    padding-bottom: 15px;
+}
+
+.patients-table td {
+    padding: 15px 0;
+    border-bottom: 1px solid #f8f9fa;
+}
+
+/* Rregullimi i saktë i fotos së pacientit në tabelë */
+.avatar-sub-patient {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    object-fit: cover; /* Eviton deformimin plotësisht */
+    background-color: #e2e8f0;
+    border: 1px solid #cbd5e1;
+    display: inline-block;
+}
+
+.btn-schedule-table {
+    background-color: #e8f7f0 !important;
+    color: #10b981 !important;
+    border: none !important;
+    font-weight: 600 !important;
+    font-size: 0.8rem !important;
+    padding: 6px 16px !important;
+    border-radius: 10px !important;
+}
+
+/* ==========================================
+   7. FAQJA E PLOTË E NJOFTIMEVE (Notification View)
+   ========================================== */
+.tab-filters {
+    border: 1px solid #e2e8f0;
+}
+
+.notification-full-card {
+    border: 1px solid #eef2f9 !important;
+    border-radius: 16px !important;
+    transition: box-shadow 0.2s;
+}
+
+.notification-full-card:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02) !important;
+}
+
+.blue-bullet-dot {
+    width: 8px;
+    height: 8px;
+    background-color: #4361ee;
+    border-radius: 50%;
+}
+
+.btn-mark-viewed {
+    background-color: #e8f7f0 !important;
+    border: none !important;
+    font-size: 0.75rem !important;
+    border-radius: 8px !important;
+    padding: 6px 12px !important;
+}
+
+/* ==========================================
+   8. KALENDARI DHE TIMELINE (DJATHAS)
+   ========================================== */
+.custom-calendar {
+    width: 100% !important;
+    border: none !important;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background: transparent !important;
+}
+
+.react-calendar__tile--active {
+    background: #4361ee !important;
+    border-radius: 8px;
+    color: white !important;
+}
+
+.timeline-section-title {
+    color: #a3b1cc;
+    letter-spacing: 0.5px;
+    font-weight: 700;
+}
+
+.timeline-container-list {
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.timeline-card-item {
+    gap: 15px;
+}
+
+.timeline-left-indicator {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 60px;
+}
+
+.timeline-time-text {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #a3b1cc;
+}
+
+.line-node {
+    width: 2px;
+    background: #eef2f9;
+    flex-grow: 1;
+    position: relative;
+    margin-top: 5px;
+    min-height: 50px;
+}
+
+.node-dot {
+    position: absolute;
+    top: 0;
+    left: -4px;
+    width: 10px;
+    height: 10px;
+    background: #3b46fc;
+    border-radius: 50%;
+    border: 2px solid #ffffff;
+    box-shadow: 0 0 0 3px rgba(59, 70, 252, 0.2);
+}
+
+.timeline-right-body {
+    background: #ffffff;
+    border: 1px solid #f0f4fd;
+    border-radius: 16px;
+    padding: 14px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.01);
+}
+
+.appointment-type-title {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: #1a202c;
+}
+
+.appointment-patient-name {
+    font-size: 0.8rem;
+    color: #718096;
+}
+
+.appointment-cost-badge {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #1a202c;
+    text-align: right;
+}
+
+.cost-label {
+    display: block;
+    font-size: 0.65rem;
+    color: #a3b1cc;
+    font-weight: 400;
+}
+
+.badge-confirmed-indicator {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #10b981;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.green-bullet {
+    width: 6px;
+    height: 6px;
+    background: #10b981;
+    border-radius: 50%;
+}
+
+.sticky-card {
+    position: sticky;
+    top: 20px;
+}
+.dashboard-wrapper ~ footer,
+.dashboard-wrapper ~ .footer-container,
+.dashboard-wrapper ~ [class*="footer"] {
+    display: none !important;
+}
+
+/* Fsheh çdo element footer nëse dashboard-i është aktiv në faqe */
+body:has(.dashboard-wrapper) footer,
+body:has(.dashboard-wrapper) .footer-container,
+body:has(.dashboard-wrapper) [class*="footer"] {
+    display: none !important;
+}
+/* Heqjen e ngjyrës automatike të sfondit për ditën e sotme (Kutitë qëndrojnë të bardha) */
+.rbc-calendar .rbc-today {
+  background-color: #ffffff !important;
+}
+
+/* Sigurohet që asnjë tekst i ditës së sotme të mos marrë ngjyra të tjera automatike */
+.rbc-calendar .rbc-current-time-indicator {
+  display: none !important; /* Heq vijën e kuqe ose blu të kohës aktuale nëse shfaqet */
+}
+
+/* Nëse dëshiron që numri i ditës së sotme të mos ketë rreth apo ngjyrë tjetër sfondi */
+.rbc-calendar .rbc-month-view .rbc-today .rbc-date-cell {
+  font-weight: normal !important;
+  color: #333333 !important;
+}
+/* Pika gri për njoftimet e lexuara */
+.gray-bullet-dot {
+  width: 8px;
+  height: 8px;
+  background-color: #a0aec0;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+/* Stil shtesë për butonin kur kthehet në Viewed */
+.btn-mark-viewed:disabled {
+  background-color: #edf2f7 !important;
+  border-color: #e2e8f0 !important;
+  cursor: not-allowed;
+}

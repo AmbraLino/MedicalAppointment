@@ -19,7 +19,10 @@ import FindDoctor from "./MainPages/FindDoctor";
 import Booking from "./MainPages/Booking";
 import AdminDoctorForm from "./Admin/AdminDoctorForm";
 import AdminUpdateDoctor from "./Admin/AdminUpdateDoctor";
-
+import DepartmentDetails from "./MainPages/DepartmentDetails";
+import AdminDepartmentPanel from "./Admin/AdminDepartmentPanel"; 
+import AdminCreateDepartment from "./Admin/AdminCreateDepartment";
+import AdminEditDepartment from "./Admin/AdminEditDepartment";
 function App() {
   return (
     <UserContextProvider>
@@ -37,8 +40,10 @@ function App() {
 {/* <Route path="/admin/update/:id" element={<AdminDoctorForm />} /> */}
 <Route path="/doctor-schedule/:id" element={<DoctorSchedule />} />
 <Route path="/booking" element={<Booking />} />
-
-
+<Route path="/department/:id" element={<DepartmentDetails />} />
+<Route path="/admin/departments" element={<AdminDepartmentPanel />} />
+<Route path="/admin/departments/create" element={<AdminCreateDepartment />} />
+<Route path="/admin/departments/edit/:id" element={<AdminEditDepartment />} />
         {/* protected routes */}
         <Route element={<ProtectedRoute allowedRoles={['doctor', 'admin']} />}>
           <Route path="/doctor/doctorDashboard" element={<DoctorDashboard />} />

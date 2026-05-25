@@ -96,6 +96,7 @@ function NavBar() {
                     <>
                       <Dropdown.Item as={Link} to="/admin/create" className="rounded">Create</Dropdown.Item>
                       <Dropdown.Item as={Link} to="/admin/doctors" className="rounded">Admin Panel</Dropdown.Item>
+                      <Dropdown.Item as={Link} to="/admin/departments" className="rounded">Manage Departments</Dropdown.Item>
                     </>
                   )}
 

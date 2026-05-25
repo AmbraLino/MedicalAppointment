@@ -13,6 +13,7 @@ const AdminUpdateDoctor = () => {
     password: "",
     department: "",
     specialty: "",
+    description: "",
     // bio: ""
   });
   const [image, setImage] = useState(null);
@@ -37,6 +38,7 @@ const AdminUpdateDoctor = () => {
           department: res.data.department || "",
           specialty: res.data.specialty || "",
           // bio: res.data.bio || ""
+          description: res.data.description || "",
         });
         setLoading(false);
       } catch (err) {
@@ -57,7 +59,8 @@ const AdminUpdateDoctor = () => {
     data.append("email", formData.email);
     data.append("department", formData.department);
     data.append("specialty", formData.specialty);
-    data.append("bio", formData.bio);
+    // data.append("bio", formData.bio);
+    data.append("description", formData.description);
     if (formData.password) data.append("password", formData.password);
     if (image) data.append("image", image);
 
@@ -97,6 +100,7 @@ const AdminUpdateDoctor = () => {
                     required
                   />
                 </Form.Group>
+            
                 <Form.Group className="mb-3">
                   <Form.Label className="fw-bold">Email</Form.Label>
                   <Form.Control
@@ -104,6 +108,14 @@ const AdminUpdateDoctor = () => {
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                     required
+                  />
+                </Form.Group>
+                 <Form.Group className="mb-3">
+                  <Form.Label className="fw-bold">Specialty</Form.Label>
+                  <Form.Control
+                    type="text"
+                    value={formData.specialty}
+                    onChange={(e) => setFormData({ ...formData, specialty: e.target.value })}
                   />
                 </Form.Group>
               </Col>
@@ -117,9 +129,18 @@ const AdminUpdateDoctor = () => {
                   />
                 </Form.Group>
                 <Form.Group className="mb-3">
+                  <Form.Label className="fw-bold">Description</Form.Label>
+                  <Form.Control
+                    type="text"
+                    value={formData.description}
+                    onChange={(e) => setFormData({ ...formData, description: e.target.value })}
+                  />
+                </Form.Group>
+                <Form.Group className="mb-3">
                   <Form.Label className="fw-bold">New photo</Form.Label>
                   <Form.Control type="file" onChange={(e) => setImage(e.target.files[0])} />
                 </Form.Group>
+                 
               </Col>
             </Row>
             <div className="d-flex gap-2 justify-content-end">
