@@ -14,7 +14,7 @@ const adminApp = require("./Routes/adminRoute");
 const bookingRoute = require('./Routes/bookingRoute');
 const doctorRoutes = require("./Routes/doctorRoute");
 const departmentRoutes = require("./Routes/departmentRoute");
-
+const reviewRoute = require('./Routes/reviewRoute');
 const app = express();
 
 // Rate Limiting
@@ -42,8 +42,13 @@ app.use(cookieParser());
 app.use(session({
   secret: process.env.SESSION_SECRET, 
   resave: false,
-  saveUninitialized: true,
-  cookie: { maxAge: 1000 * 60 * 60 * 24 }
+  saveUninitialized: false,
+  cookie: { 
+    maxAge: 1000 * 60 * 60 * 24,
+    secure: false,
+    httpOnly: true,
+    sameSite: 'lax' 
+  }
 }));
 
 app.use("/Images", express.static(path.join(__dirname, "Images")));
@@ -54,6 +59,8 @@ app.use("/admin", adminApp);
 app.use("/booking", bookingRoute);
 app.use("/api/doctors", doctorRoutes);
 app.use("/api/departments", departmentRoutes);
+app.use('/api/reviews', reviewRoute);
+// console.log("Rruga /api/reviews është regjistruar!"); 
 
 mongoose.connect(process.env.MONGO_URI)
 .then(() => console.log("DB connected"))

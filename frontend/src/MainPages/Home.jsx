@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import home from "../Images/2home.jpg";
 import home1 from "../Images/3home.jpg";
@@ -8,9 +9,15 @@ import "./Home.css";
 
 const Home = () => {
   const navigate = useNavigate();
+  const [reviews, setReviews] = useState([]);
   const [search, setSearch] = useState("");
   const cardsPerPage = 3;
 
+  useEffect(() => {
+    axios.get("http://localhost:5000/api/reviews/top") // Sigurohu që path-i është i saktë
+      .then(res => setReviews(res.data))
+      .catch(err => console.error("Gabim në marrjen e vlerësimeve:", err));
+  }, []);
   const rating = [
      {
 
@@ -31,6 +38,7 @@ const Home = () => {
     },
    
   ];
+  
 
   return (
   <div className="home-container" style={{ overflowX: 'hidden' }}>
@@ -114,6 +122,18 @@ const Home = () => {
         </div>
 
     </div>
+</section>
+<section className="reviews-section">
+  <h2>Çfarë thonë pacientët tanë</h2>
+  <div className="reviews-container d-flex justify-content-center">
+    {reviews.map((review) => (
+      <div key={review._id} className="review-card p-3 m-2 border">
+        <h5>{review.patientId?.fullName || "Pacient"}</h5>
+        <p>Rating: {review.rating} ★</p>
+        <p>"{review.comment}"</p>
+      </div>
+    ))}
+  </div>
 </section>
 </div>
 

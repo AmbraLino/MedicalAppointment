@@ -103,20 +103,22 @@ router.put("/cancel/:id", verifyToken, async (req, res) => {
 });
 
 // 7. PRANIMI I PAGESËS ONLINE (PUT)
+
 router.put("/pay/:id", verifyToken, async (req, res) => {
   try {
     const booking = await Booking.findById(req.params.id);
     if (!booking) return res.status(404).json({ message: "Reservation not found!" });
 
-    booking.isPaid = true; // Ndryshon fushën në true pas pagesës
+    // Përditëso statusin e pagesës
+    booking.isPaid = true;
+    booking.paymentDate = new Date(); // Ruajmë datën e pagesës
     await booking.save();
 
-    res.status(200).json({ message: "Pagesa u krye me sukses!", booking });
+    res.status(200).json({ message: "Pagesa u regjistrua me sukses!", isPaid: booking.isPaid });
   } catch (err) {
     res.status(500).json({ message: "Gabim gjatë përpunimit të pagesës" });
   }
 });
-
 // 8. FSHIRJA E REZERVIMIT (E lamë siç e kishit)
 router.delete("/cancel/:id", verifyToken, async (req, res) => {
   try {

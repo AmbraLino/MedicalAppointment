@@ -85,7 +85,9 @@ router.post("/login", async (req, res) => {
 
 // 4. --- GET PROFILE (I saktësuar që të kthejë .image për React) ---
 router.get("/profile", async (req, res) => {
+  console.log("Cookies të pranuara:", req.cookies);
   const token = req.cookies?.token;
+  
   if (!token) return res.status(401).json({ message: "No token provided" });
 
   jwt.verify(token, process.env.JWT_SECRET, {}, async (err, decoded) => {

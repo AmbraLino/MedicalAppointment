@@ -50,13 +50,40 @@ footer, .footer-container, .site-footer {
     display: flex;
     flex-direction: column;
     position: fixed;
-    height: 100vh;
+    height: 50vh;
     left: 0;
     top: 0;
     z-index: 10;
     box-sizing: border-box;
 }
+.search-box {
+  width: 200px;
+  position: relative; 
+  z-index: 1000; /* Rriteni vlerën e z-index-it */
+  pointer-events: auto; /* Sigurohuni që lejon klikimin */
+}
 
+.search-box .form-control {
+  position: relative;
+  z-index: 1001; /* Fusha e inputit duhet të jetë mbi çdo gjë tjetër */
+  border: none !important;
+  box-shadow: none !important;
+  background: transparent !important;
+}
+
+.search-box .input-group {
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  background: #ffffff;
+  padding: 0 5px;
+}
+
+
+/* Shto këtë për të evituar mbivendosjen */
+.topbar-container {
+  position: relative;
+  z-index: 1;
+}
 .sidebar-logo {
     margin-bottom: 40px;
     padding-left: 10px;
@@ -124,9 +151,6 @@ footer, .footer-container, .site-footer {
     font-size: 0.9rem;
 }
 
-/* ==========================================
-   3. TOPBAR / HEADER STILIMI
-   ========================================== */
 .topbar-container {
     background: transparent;
     padding: 10px 0;
@@ -163,16 +187,7 @@ footer, .footer-container, .site-footer {
     border-radius: 50%;
 }
 
-/* Rregullimi i saktë i fotos së Doktorit */
-.avatar-main {
-    width: 44px;
-    height: 44px;
-    border-radius: 50%;
-    object-fit: cover; /* Parandalon shtrembërimin ose zgjatjen e imazhit dinamik */
-    background-color: #e2e8f0;
-    border: 1px solid #cbd5e1;
-    display: block;
-}
+
 
 .profile-name {
     font-size: 0.95rem;
@@ -184,10 +199,6 @@ footer, .footer-container, .site-footer {
     font-size: 0.8rem;
     color: #718096;
 }
-
-/* ==========================================
-   4. STAT CARDS (KARTAT E STATISTIKAVE)
-   ========================================== */
 .stat-card {
     border-radius: 20px !important;
     background: #ffffff;
@@ -246,14 +257,7 @@ footer, .footer-container, .site-footer {
     padding: 15px !important;
 }
 
-/* Fotot e pacientëve nëpër lista */
-.avatar-sub {
-    width: 38px;
-    height: 38px;
-    border-radius: 50%;
-    object-fit: cover;
-    background-color: #e2e8f0;
-}
+
 
 .item-name { color: #2d3748; }
 
@@ -311,16 +315,7 @@ footer, .footer-container, .site-footer {
     border-bottom: 1px solid #f8f9fa;
 }
 
-/* Rregullimi i saktë i fotos së pacientit në tabelë */
-.avatar-sub-patient {
-    width: 38px;
-    height: 38px;
-    border-radius: 50%;
-    object-fit: cover; /* Eviton deformimin plotësisht */
-    background-color: #e2e8f0;
-    border: 1px solid #cbd5e1;
-    display: inline-block;
-}
+
 
 .btn-schedule-table {
     background-color: #e8f7f0 !important;
@@ -332,9 +327,6 @@ footer, .footer-container, .site-footer {
     border-radius: 10px !important;
 }
 
-/* ==========================================
-   7. FAQJA E PLOTË E NJOFTIMEVE (Notification View)
-   ========================================== */
 .tab-filters {
     border: 1px solid #e2e8f0;
 }
@@ -364,9 +356,6 @@ footer, .footer-container, .site-footer {
     padding: 6px 12px !important;
 }
 
-/* ==========================================
-   8. KALENDARI DHE TIMELINE (DJATHAS)
-   ========================================== */
 .custom-calendar {
     width: 100% !important;
     border: none !important;
@@ -454,14 +443,12 @@ footer, .footer-container, .site-footer {
     color: #1a202c;
     text-align: right;
 }
-
 .cost-label {
     display: block;
     font-size: 0.65rem;
     color: #a3b1cc;
     font-weight: 400;
 }
-
 .badge-confirmed-indicator {
     font-size: 0.75rem;
     font-weight: 600;
@@ -470,14 +457,12 @@ footer, .footer-container, .site-footer {
     align-items: center;
     gap: 6px;
 }
-
 .green-bullet {
     width: 6px;
     height: 6px;
     background: #10b981;
     border-radius: 50%;
 }
-
 .sticky-card {
     position: sticky;
     top: 20px;
@@ -487,29 +472,23 @@ footer, .footer-container, .site-footer {
 .dashboard-wrapper ~ [class*="footer"] {
     display: none !important;
 }
-
-/* Fsheh çdo element footer nëse dashboard-i është aktiv në faqe */
 body:has(.dashboard-wrapper) footer,
 body:has(.dashboard-wrapper) .footer-container,
 body:has(.dashboard-wrapper) [class*="footer"] {
     display: none !important;
 }
-/* Heqjen e ngjyrës automatike të sfondit për ditën e sotme (Kutitë qëndrojnë të bardha) */
 .rbc-calendar .rbc-today {
   background-color: #ffffff !important;
 }
 
-/* Sigurohet që asnjë tekst i ditës së sotme të mos marrë ngjyra të tjera automatike */
 .rbc-calendar .rbc-current-time-indicator {
-  display: none !important; /* Heq vijën e kuqe ose blu të kohës aktuale nëse shfaqet */
+  display: none !important; 
 }
 
-/* Nëse dëshiron që numri i ditës së sotme të mos ketë rreth apo ngjyrë tjetër sfondi */
 .rbc-calendar .rbc-month-view .rbc-today .rbc-date-cell {
   font-weight: normal !important;
   color: #333333 !important;
 }
-/* Pika gri për njoftimet e lexuara */
 .gray-bullet-dot {
   width: 8px;
   height: 8px;
@@ -517,8 +496,6 @@ body:has(.dashboard-wrapper) [class*="footer"] {
   border-radius: 50%;
   display: inline-block;
 }
-
-/* Stil shtesë për butonin kur kthehet në Viewed */
 .btn-mark-viewed:disabled {
   background-color: #edf2f7 !important;
   border-color: #e2e8f0 !important;

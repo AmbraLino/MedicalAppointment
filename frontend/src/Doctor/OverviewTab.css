@@ -1,0 +1,49 @@
+/* Stili për kartat e njoftimeve */
+.content-card {
+  border-radius: 15px !important;
+  background-color: #ffffff;
+}
+
+.avatar-sub {
+  width: 45px !important;
+  height: 45px !important;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+/* Stili për inputin e çmimit që të duket si në foto */
+.form-control-sm {
+  border-radius: 8px !important;
+  border: 1px solid #dee2e6;
+  padding: 5px 10px;
+}
+
+/* Butonat */
+.btn-sm {
+  border-radius: 8px !important;
+  padding: 5px 12px !important;
+}
+
+/* Timeline-i në të djathtë */
+.timeline-card-item {
+  padding: 10px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.timeline-time-text {
+  font-weight: 600;
+  color: #555;
+  margin-right: 15px;
+}
+
+/* Kalendari */
+.custom-calendar {
+  border: none !important;
+  width: 100%;
+}
+
+.react-calendar__tile--active {
+  background: #007bff !important;
+  color: white;
+  border-radius: 5px;
+}

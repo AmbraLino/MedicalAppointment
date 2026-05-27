@@ -33,12 +33,19 @@ const bookingSchema = new mongoose.Schema({
     enum: ['online', 'offline'], 
     default: 'offline' 
   },
-
+isPaid: {
+  type: Boolean,
+  default: false
+},
+paymentDate: {
+  type: Date
+},
   status: {
     type: String,
     enum: ["pending", "approved", "rejected"],
     default: "pending",
   },
 }, { timestamps: true });
+
 
 module.exports = mongoose.model("Booking", bookingSchema);

@@ -20,7 +20,16 @@ export function UserContextProvider({ children }) {
         });
     }
   }, []);
-
+const getProfile = async () => {
+  try {
+    const { data } = await axios.get("http://localhost:5000/user/profile", {
+       withCredentials: true // KJO ËSHTË KRITIKE
+    });
+    setUserInfo(data);
+  } catch (e) {
+    console.error("Sesioni ka skaduar ose nuk është dërguar:", e);
+  }
+};
   return (
     <UserContext.Provider value={{ userInfo, setUserInfo, ready }}>
       {children}

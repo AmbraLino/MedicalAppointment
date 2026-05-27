@@ -3,66 +3,30 @@ import { UserContext } from "../Auth/UserContext";
 import axios from "axios";
 import { PayPalScriptProvider, PayPalButtons, usePayPalScriptReducer } from "@paypal/react-paypal-js";
 import "./UserProfile.css";
+import ReviewModal from "../MainPages/ReviewModal";
 
 // Direct Client ID configuration for the US Sandbox environment
-const PAYPAL_CLIENT_ID = process.env.REACT_APP_PAYPAL_CLIENT_ID || "AVgLq5mpEBS7C3pxog29lyGY3pW9WT0TKeFiWMAWrmod40FB4xUMpjYzxCsQnSkUl5Y2h3W-IubWjAlp";
+const PAYPAL_CLIENT_ID = "AVgLq5mpEBS7C3pxog29lyGY3pW9WT0TKeFiWMAWrmod40FB4xUMpjYzxCsQnSkUl5Y2h3W-IubWjAlp";
 
-// Isolated component to safely manage the lifecycle of PayPal buttons
 const PayPalButtonComponent = ({ cost, bookingId, onSuccess, onCancel }) => {
-  const [{ isPending }, dispatch] = usePayPalScriptReducer();
-
-  useEffect(() => {
-    // Forcefully trigger the script download only when this specific button context mounts
-    dispatch({
-      type: "resetOptions",
-      value: {
-        "client-id": PAYPAL_CLIENT_ID,
-        currency: "USD",
-        intent: "capture"
-      },
-    });
-  }, [dispatch]);
-
-  // Clean and parse the cost value safely
-  let rawCost = cost ? cost.toString() : "40.00";
-  let cleanCost = rawCost.replace(/[^0-9.]/g, '');
-  if (!cleanCost || parseFloat(cleanCost) <= 0) {
-    cleanCost = "40.00";
-  }
-
+  // Pastrimi i vlerës së çmimit
+  let cleanCost = cost ? cost.toString().replace(/[^0-9.]/g, '') : "40.00";
+  if (parseFloat(cleanCost) <= 0) cleanCost = "40.00";
   return (
-    <div style={{ marginTop: "10px", minHeight: "150px" }}>
-      {isPending ? (
-        <div className="paypal-loading-spinner" style={{ margin: "10px 0", color: "#0070ba", fontWeight: "bold" }}>
-          Connecting to PayPal Secure Servers...
-        </div>
-      ) : null}
-      
+    <div style={{ marginTop: "10px" }}>
       <PayPalButtons
-        style={{ layout: "vertical", height: 35 }}
+        style={{ layout: "vertical" }}
         createOrder={(data, actions) => {
-          console.log("Transferring clean calculated cost payload to PayPal SDK:", cleanCost);
           return actions.order.create({
             intent: "CAPTURE",
-            purchase_units: [{
-              amount: {
-                currency_code: "USD",
-                value: cleanCost 
-              }
-            }]
+            purchase_units: [{ amount: { currency_code: "USD", value: cleanCost } }]
           });
         }}
         onApprove={(data, actions) => {
-          return actions.order.capture().then(() => {
-            onSuccess(bookingId);
-          });
-        }}
-        onError={(err) => {
-          console.error("PayPal Interactive SDK Exception Event:", err);
-          alert("An internal setup error occurred while communicating with PayPal. Please check your developer console dashboard (F12).");
+          return actions.order.capture().then(() => onSuccess(bookingId));
         }}
       />
-      
+
       <button
         className="delete-res-btn"
         style={{ backgroundColor: "#6c757d", width: "100%", marginTop: "5px" }}
@@ -71,6 +35,7 @@ const PayPalButtonComponent = ({ cost, bookingId, onSuccess, onCancel }) => {
         Cancel Payment
       </button>
     </div>
+
   );
 };
 
@@ -87,7 +52,8 @@ const UserProfile = () => {
   const [loadingRes, setLoadingRes] = useState(true);
 
   const [activePaymentId, setActivePaymentId] = useState(null);
-
+  const [showReviewModal, setShowReviewModal] = useState(false);
+  const [selectedDoctor, setSelectedDoctor] = useState(null);
   useEffect(() => {
     if (userInfo) {
       setFormData({
@@ -145,16 +111,21 @@ const UserProfile = () => {
         { withCredentials: true }
       );
 
+      // Këtu marrim të dhënat e përditësuara që vijnë nga serveri
+      const updatedBooking = res.data.booking || res.data;
+
       setReservations(prev =>
-        prev.map(item => item._id === bookingId ? { ...item, isPaid: true } : item)
+        prev.map(item => item._id === bookingId ? { ...item, ...updatedBooking } : item)
       );
+
       setActivePaymentId(null);
-      alert(res.data.message || "Payment processed successfully!");
+      alert("Pagesa u regjistrua me sukses!");
     } catch (err) {
-      console.error("Backend payment capture sync error:", err);
-      alert("Error synchronizing payment record with the system backend.");
+      console.error("Backend error:", err);
+      alert("Gabim gjatë lidhjes me serverin.");
     }
   };
+
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -209,16 +180,15 @@ const UserProfile = () => {
   };
 
   const imageSrc = getImageSrc();
-
   return (
-<PayPalScriptProvider 
-    options={{ 
-      "client-id": "AVgLq5mpEBS7C3pxog29lyGY3pW9WT0TKeFiWMAWrmod40FB4xUMpjYzxCsQnSkUl5Y2h3W-IubWjAlp", 
-      currency: "USD",
-      intent: "capture",
-      "merchant-id": "NDDUTV3LJTF48" 
-    }}
-  >      <div className="user-profile-wrapper">
+    <PayPalScriptProvider
+      options={{
+        "client-id": "AZsjFKZqLvSsAtx4bXuT0FyQADls9fVMI8HUirLsvvv8fPfT33V805l2TtQUUHB9QkwIVQSebABOj1uR",
+        "currency": "USD",
+        "intent": "capture"
+      }}
+    >
+      <div className="user-profile-wrapper">
         <div className="profile-column">
           <h2>My Profile</h2>
           <form className="user-profile-form" onSubmit={handleSubmit}>
@@ -309,15 +279,23 @@ const UserProfile = () => {
                             onCancel={() => setActivePaymentId(null)}
                           />
                         ) : (
-                          <button
-                            className="pay-now-btn"
-                            onClick={() => setActivePaymentId(item._id)}
-                          >
+                          <button className="pay-now-btn" onClick={() => setActivePaymentId(item._id)}>
                             Pay with PayPal
                           </button>
                         )
                       )}
-
+                      <div className="review-section">
+                        <button
+                          className="btn-review"
+                          onClick={() => {
+                            console.log("Duke klikuar, DoctorID:", item.doctor?._id);
+                            setSelectedDoctor(item.doctor?._id);
+                            setShowReviewModal(true);
+                          }}
+                        >
+                          Lini një vlerësim (Test)
+                        </button>
+                      </div>
                       {item.status !== "Cancelled by Patient" && (
                         <button
                           className="delete-res-btn"
@@ -333,6 +311,11 @@ const UserProfile = () => {
             </div>
           )}
         </div>
+        <ReviewModal
+          show={showReviewModal}
+          handleClose={() => setShowReviewModal(false)}
+          doctorId={selectedDoctor}
+        />
       </div>
     </PayPalScriptProvider>
   );

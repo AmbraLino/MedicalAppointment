@@ -1,0 +1,64 @@
+/* Sfondi që errëson faqen kur hapet modal */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6); /* Sfond gjysmë transparent */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999; /* Siguron që të jetë sipër çdo gjëje tjetër */
+}
+
+/* Kutia e modalit */
+.review-modal {
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 400px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  position: relative;
+  text-align: center;
+}
+
+/* Butoni i mbylljes (X) */
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: #333;
+}
+
+/* Teksti dhe zona e komenteve */
+textarea {
+  width: 100%;
+  height: 100px;
+  margin-top: 15px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  resize: none;
+}
+
+.submit-review-btn {
+  margin-top: 20px;
+  width: 100%;
+  padding: 10px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.submit-review-btn:hover {
+  background-color: #218838;
+}

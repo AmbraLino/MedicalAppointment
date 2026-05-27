@@ -23,6 +23,8 @@ import DepartmentDetails from "./MainPages/DepartmentDetails";
 import AdminDepartmentPanel from "./Admin/AdminDepartmentPanel"; 
 import AdminCreateDepartment from "./Admin/AdminCreateDepartment";
 import AdminEditDepartment from "./Admin/AdminEditDepartment";
+import ReviewModal from "./MainPages/ReviewModal";
+import Reviews from "./MainPages/Reviews";
 function App() {
   return (
     <UserContextProvider>
@@ -44,6 +46,8 @@ function App() {
 <Route path="/admin/departments" element={<AdminDepartmentPanel />} />
 <Route path="/admin/departments/create" element={<AdminCreateDepartment />} />
 <Route path="/admin/departments/edit/:id" element={<AdminEditDepartment />} />
+<Route path="/reviews" element={<Reviews />} />
+<Route path="/review" element={<ReviewModal />} />
         {/* protected routes */}
         <Route element={<ProtectedRoute allowedRoles={['doctor', 'admin']} />}>
           <Route path="/doctor/doctorDashboard" element={<DoctorDashboard />} />

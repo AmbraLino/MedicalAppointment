@@ -60,7 +60,7 @@ function NavBar() {
                 <Nav.Link as={Link} to="/finddoctor" className="mx-2" style={{ color: "#FEFAE0" }}>Find Doctor</Nav.Link>
                 <Nav.Link as={Link} to="/about" className="mx-2" style={{ color: "#FEFAE0" }}>About</Nav.Link>
                 <Nav.Link as={Link} to="/contact" className="mx-2" style={{ color: "#FEFAE0" }}>Contact</Nav.Link>
-                
+                <Nav.Link as={Link} to="/reviews" className="mx-2" style={{ color: "#FEFAE0" }}>Reviews</Nav.Link>
                 <div className="d-inline-flex align-items-center px-3 py-1 rounded-pill ms-lg-3 my-2 my-lg-0" 
                      style={{ background: "rgba(255,255,255,0.15)", border: "1px solid rgba(255,255,255,0.2)" }}> 
                   <FontAwesomeIcon icon={faMagnifyingGlass} className="me-2" style={{ color: "white" }} /> 
